@@ -1,22 +1,20 @@
-package com.pkrok.entity;
+package com.pkrok.Entity;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 
 @Entity
-@Table(name = "firm")
-public class FirmEntity {
+@Table(name = "type")
+public class TypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 60, unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
-
 }

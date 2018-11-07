@@ -1,7 +1,7 @@
-package com.pkrok.domain;
+package com.pkrok.Domain;
 
-import com.pkrok.entity.FirmEntity;
-import com.pkrok.entity.TypeEntity;
+import com.pkrok.Entity.FirmEntity;
+import com.pkrok.Entity.TypeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public class PartsDTO {
     private BigDecimal price;
     private String description;
     private String image;
-//    private Date lastUpdate;
+    //    private Date lastUpdate;
     private TypeEntity type;
     private FirmEntity firm;
 }

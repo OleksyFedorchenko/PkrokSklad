@@ -1,38 +1,40 @@
 package com.pkrok.Controller;
 
-import com.pkrok.Service.PartsService;
-import com.pkrok.domain.PartsDTO;
+import com.pkrok.Service.PartService;
+import com.pkrok.Domain.PartsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("parts")
 public class PartController {
+
+    private PartService partService;
+
     @Autowired
-    private PartsService partsService;
+    public PartController(PartService partService) {
+        this.partService = partService;
+    }
 
     @PostMapping
     public ResponseEntity<?> addPart(@RequestBody PartsDTO part) {
-        partsService.addPart(part);
+        partService.addPart(part);
         return new ResponseEntity<Void>(HttpStatus.CREATED); //201
     }
 
     @GetMapping
-    public ResponseEntity<List<PartsDTO>> getParts(){
-        List<PartsDTO> parts=partsService.findAllParts();
-        return new ResponseEntity<List<PartsDTO>>(parts,HttpStatus.OK);
+    public ResponseEntity<List<PartsDTO>> getParts() {
+        return ResponseEntity.ok(partService.findAllParts());
     }
 
 
     @GetMapping("{firmName}/{typeName}")
-    public ResponseEntity<List<PartsDTO>> getPartsByPar(@PathVariable("firmName")String firmName,@PathVariable("typeName") String typeName){
-        List<PartsDTO> parts =partsService.findByFirmAndType(firmName,typeName);
-        return new ResponseEntity<List<PartsDTO>>(parts,HttpStatus.OK);
+    public ResponseEntity<List<PartsDTO>> getPartsByPar(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
+        return ResponseEntity.ok(partService.findByFirmAndType(firmName, typeName));
     }
 
 

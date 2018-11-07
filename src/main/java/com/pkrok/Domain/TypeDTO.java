@@ -1,4 +1,4 @@
-package com.pkrok.domain;
+package com.pkrok.Domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FirmDTO {
+public class TypeDTO {
     private Long id;
     private String name;
 }

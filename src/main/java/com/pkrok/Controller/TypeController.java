@@ -1,7 +1,7 @@
 package com.pkrok.Controller;
 
 import com.pkrok.Service.TypeService;
-import com.pkrok.domain.TypeDTO;
+import com.pkrok.Domain.TypeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,6 @@ public class TypeController {
 
     @GetMapping
     public ResponseEntity<List<TypeDTO>> getTypes() {
-        List<TypeDTO> types = typeService.findAllTypes();
-        return new ResponseEntity<List<TypeDTO>>(types, HttpStatus.OK);
+        return ResponseEntity.ok(typeService.findAllTypes());
     }
 }
