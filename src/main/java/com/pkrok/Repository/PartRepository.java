@@ -15,5 +15,8 @@ public interface PartRepository extends JpaRepository<PartEntity,Long> {
     @Query("SELECT p FROM PartEntity p JOIN p.firm pf JOIN p.type pt WHERE pf.name=:firmName AND pt.name=:typeName")
     List<PartEntity> findByFirmAndType(@Param("firmName")String firmName, @Param("typeName") String typeName);
 
+    List<PartEntity> findByNameContaining(String name);
+
     PartEntity findByName(String name);
 }
+

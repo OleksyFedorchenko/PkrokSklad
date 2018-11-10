@@ -44,5 +44,11 @@ public class PartServiceImpl implements PartService {
         return modelMapper.mapAll(partsEntities, PartsDTO.class);
     }
 
+    @Override
+    public List<PartsDTO> findByNameContains(String name){
+        List<PartEntity> partEntities=partRepository.findByNameContaining(name);
+        return modelMapper.mapAll(partEntities,PartsDTO.class);
+    }
+
 
 }
