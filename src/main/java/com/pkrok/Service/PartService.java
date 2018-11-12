@@ -12,4 +12,8 @@ public interface PartService {
     List<PartsDTO> findByFirmAndType(String firmName, String typeName);
 
     List<PartsDTO> findByNameContains(String name);
+
+    List<PartsDTO> findAllPartsOrderByName();
+
+    List<PartsDTO> findAllPartsOrderByQuantity();
 }

@@ -25,8 +25,8 @@ public class PartServiceImpl implements PartService {
     @Override
     public void addPart(PartsDTO partDTO) {
         PartEntity partEntity = partRepository.findByName(partDTO.getName());
-        if (partEntity !=null){
-            throw new AlreadyExistsException("Product with name ["+partDTO.getName()+"]already exists");
+        if (partEntity != null) {
+            throw new AlreadyExistsException("Product with name [" + partDTO.getName() + "]already exists");
         }
         PartEntity part = modelMapper.map(partDTO, PartEntity.class);
         partRepository.save(part);
@@ -45,9 +45,21 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public List<PartsDTO> findByNameContains(String name){
-        List<PartEntity> partEntities=partRepository.findByNameContaining(name);
-        return modelMapper.mapAll(partEntities,PartsDTO.class);
+    public List<PartsDTO> findByNameContains(String name) {
+        List<PartEntity> partEntities = partRepository.findByNameContaining(name);
+        return modelMapper.mapAll(partEntities, PartsDTO.class);
+    }
+
+    @Override
+    public List<PartsDTO> findAllPartsOrderByName() {
+        List<PartEntity> partEntities = partRepository.findAllOrderByName();
+        return modelMapper.mapAll(partEntities, PartsDTO.class);
+    }
+
+    @Override
+    public List<PartsDTO> findAllPartsOrderByQuantity() {
+        List<PartEntity> partEntities = partRepository.findAllOrderByQuantity();
+        return modelMapper.mapAll(partEntities, PartsDTO.class);
     }
 
 

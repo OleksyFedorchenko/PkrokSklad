@@ -23,9 +23,9 @@ public class PartController {
     private PartService partService;
 
     @Autowired
-    public PartController(PartService partService,FileStorageService fileStorageService) {
+    public PartController(PartService partService, FileStorageService fileStorageService) {
         this.partService = partService;
-        this.fileStorageService=fileStorageService;
+        this.fileStorageService = fileStorageService;
     }
 
     @PostMapping
@@ -47,6 +47,15 @@ public class PartController {
         return ResponseEntity.ok(partService.findAllParts());
     }
 
+    @GetMapping
+    public ResponseEntity<List<PartsDTO>> getPartsOrderByName() {
+        return ResponseEntity.ok(partService.findAllPartsOrderByName());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PartsDTO>> getPartsOrderByQuantity() {
+        return ResponseEntity.ok(partService.findAllPartsOrderByQuantity());
+    }
 
     @GetMapping("{firmName}/{typeName}")
     public ResponseEntity<List<PartsDTO>> getPartsByFirmAndType(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
@@ -58,9 +67,8 @@ public class PartController {
         return ResponseEntity.ok(partService.findByNameContains(name));
     }
 
-
-    @PostMapping("{productId}/image")
-    public ResponseEntity<?> uploadImage(@PathVariable("productId") Long id, @RequestParam("file") MultipartFile file) {
+    @PostMapping("image")
+    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
         System.out.println(file.getOriginalFilename());
         fileStorageService.storeFile(file);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
