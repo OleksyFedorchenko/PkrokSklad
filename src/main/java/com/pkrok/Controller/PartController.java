@@ -65,12 +65,12 @@ public class PartController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping
+    @GetMapping("name")
     public ResponseEntity<List<PartsDTO>> getPartsOrderByName() {
         return ResponseEntity.ok(partService.findAllPartsOrderByName());
     }
 
-    @GetMapping
+    @GetMapping("quantity")
     public ResponseEntity<List<PartsDTO>> getPartsOrderByQuantity() {
         return ResponseEntity.ok(partService.findAllPartsOrderByQuantity());
     }

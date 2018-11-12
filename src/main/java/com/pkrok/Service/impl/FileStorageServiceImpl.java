@@ -20,14 +20,14 @@ public class FileStorageServiceImpl implements FileStorageService {
     private final Path fileStorageLocation;
 
     public FileStorageServiceImpl() {
-        String uploadDir = PATH+SEPARATOR+"uploads";
+        String uploadDir = PATH + SEPARATOR + "uploads";
         System.out.println(uploadDir);
 
         this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
 
-        try{
+        try {
             Files.createDirectories(this.fileStorageLocation);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -42,7 +42,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         try {
             targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return fileName;

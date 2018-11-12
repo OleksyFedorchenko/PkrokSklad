@@ -53,13 +53,13 @@ public class PartServiceImpl implements PartService {
     @Override
     public List<PartsDTO> findAllPartsOrderByName() {
         List<PartEntity> partEntities = partRepository.findAllByOrderByNameAsc();
-        return modelMapper.mapAll(partEntities,PartsDTO.class);
+        return modelMapper.mapAll(partEntities, PartsDTO.class);
     }
 
     @Override
     public List<PartsDTO> findAllPartsOrderByQuantity() {
         List<PartEntity> partEntities = partRepository.findAllByOrderByQuantityAsc();
-        return modelMapper.mapAll(partEntities,PartsDTO.class);
+        return modelMapper.mapAll(partEntities, PartsDTO.class);
     }
 
 
