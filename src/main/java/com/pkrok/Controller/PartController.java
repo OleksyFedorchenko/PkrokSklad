@@ -47,15 +47,6 @@ public class PartController {
         return ResponseEntity.ok(partService.findAllParts());
     }
 
-    @GetMapping
-    public ResponseEntity<List<PartsDTO>> getPartsOrderByName() {
-        return ResponseEntity.ok(partService.findAllPartsOrderByName());
-    }
-
-    @GetMapping
-    public ResponseEntity<List<PartsDTO>> getPartsOrderByQuantity() {
-        return ResponseEntity.ok(partService.findAllPartsOrderByQuantity());
-    }
 
     @GetMapping("{firmName}/{typeName}")
     public ResponseEntity<List<PartsDTO>> getPartsByFirmAndType(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
