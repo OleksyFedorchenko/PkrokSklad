@@ -18,5 +18,9 @@ public interface PartRepository extends JpaRepository<PartEntity, Long> {
     List<PartEntity> findByNameContaining(String name);
 
     PartEntity findByName(String name);
+
+    List<PartEntity> findAllByOrderByNameAsc();
+
+    List<PartEntity> findAllByOrderByQuantityAsc();
 }
 

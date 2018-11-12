@@ -64,4 +64,15 @@ public class PartController {
         fileStorageService.storeFile(file);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<PartsDTO>> getPartsOrderByName() {
+        return ResponseEntity.ok(partService.findAllPartsOrderByName());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PartsDTO>> getPartsOrderByQuantity() {
+        return ResponseEntity.ok(partService.findAllPartsOrderByQuantity());
+    }
+
 }
