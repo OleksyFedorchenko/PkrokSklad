@@ -13,7 +13,4 @@ public interface PartService {
 
     List<PartsDTO> findByNameContains(String name);
 
-    List<PartsDTO> findAllPartsOrderByName();
-
-    List<PartsDTO> findAllPartsOrderByQuantity();
 }

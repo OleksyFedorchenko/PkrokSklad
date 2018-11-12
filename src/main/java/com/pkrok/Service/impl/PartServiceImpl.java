@@ -50,17 +50,5 @@ public class PartServiceImpl implements PartService {
         return modelMapper.mapAll(partEntities, PartsDTO.class);
     }
 
-    @Override
-    public List<PartsDTO> findAllPartsOrderByName() {
-        List<PartEntity> partEntities = partRepository.findAllOrderByName();
-        return modelMapper.mapAll(partEntities, PartsDTO.class);
-    }
-
-    @Override
-    public List<PartsDTO> findAllPartsOrderByQuantity() {
-        List<PartEntity> partEntities = partRepository.findAllOrderByQuantity();
-        return modelMapper.mapAll(partEntities, PartsDTO.class);
-    }
-
 
 }
