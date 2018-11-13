@@ -17,4 +17,7 @@ public interface PartService {
 
     List<PartsDTO> findAllPartsOrderByQuantity();
 
+    List<PartsDTO> findByFirmAndTypeOrdNameLike(String firmName, String typeName,String search);
+
+    List<PartsDTO> findByFirmAndTypeOrdQuantityLike(String firmName, String typeName,String search);
 }

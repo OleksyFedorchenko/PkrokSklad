@@ -22,5 +22,12 @@ public interface PartRepository extends JpaRepository<PartEntity, Long> {
     List<PartEntity> findAllByOrderByNameAsc();
 
     List<PartEntity> findAllByOrderByQuantityAsc();
+
+    @Query("SELECT p FROM PartEntity p JOIN p.firm pf JOIN p.type pt WHERE (pf.name=:firmName AND pt.name=:typeName AND p.name LIKE :search) ORDER BY p.name")
+    List<PartEntity> findByFirmAndTypeOrdNameLike(@Param("firmName") String firmName, @Param("typeName") String typeName,@Param("search") String search);
+
+    @Query("SELECT p FROM PartEntity p JOIN p.firm pf JOIN p.type pt WHERE (pf.name=:firmName AND pt.name=:typeName AND p.name LIKE :search) ORDER BY p.quantity")
+    List<PartEntity> findByFirmAndTypeOrdQuantityLike(@Param("firmName") String firmName, @Param("typeName") String typeName,@Param("search") String search);
+
 }
 

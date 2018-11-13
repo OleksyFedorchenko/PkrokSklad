@@ -65,14 +65,26 @@ public class PartController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("name")
+    @GetMapping("Name")
     public ResponseEntity<List<PartsDTO>> getPartsOrderByName() {
         return ResponseEntity.ok(partService.findAllPartsOrderByName());
     }
 
-    @GetMapping("quantity")
+    @GetMapping("Quantity")
     public ResponseEntity<List<PartsDTO>> getPartsOrderByQuantity() {
         return ResponseEntity.ok(partService.findAllPartsOrderByQuantity());
     }
 
+
+    @GetMapping("{firmName}/{typeName}/Name/{search}")
+    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdNameLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName,@PathVariable("search") String search) {
+        String s="%"+search+"%";
+        return ResponseEntity.ok(partService.findByFirmAndTypeOrdNameLike(firmName, typeName,s));
+    }
+
+    @GetMapping("{firmName}/{typeName}/Quantity/{search}")
+    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdQuantityLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName,@PathVariable("search") String search) {
+        String s="%"+search+"%";
+        return ResponseEntity.ok(partService.findByFirmAndTypeOrdQuantityLike(firmName, typeName,s));
+    }
 }
