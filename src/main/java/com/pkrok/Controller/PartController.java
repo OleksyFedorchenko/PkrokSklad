@@ -75,6 +75,15 @@ public class PartController {
         return ResponseEntity.ok(partService.findAllPartsOrderByQuantity());
     }
 
+    @GetMapping("{firmName}/{typeName}/Name")
+    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdName(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
+        return ResponseEntity.ok(partService.findByFirmAndTypeOrdName(firmName, typeName));
+    }
+
+    @GetMapping("{firmName}/{typeName}/Quantity")
+    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdQuantity(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
+        return ResponseEntity.ok(partService.findByFirmAndTypeOrdQuantity(firmName, typeName));
+    }
 
     @GetMapping("{firmName}/{typeName}/Name/{search}")
     public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdNameLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName,@PathVariable("search") String search) {

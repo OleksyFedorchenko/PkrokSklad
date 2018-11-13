@@ -62,6 +62,17 @@ public class PartServiceImpl implements PartService {
         return modelMapper.mapAll(partEntities, PartsDTO.class);
     }
 
+    @Override
+    public List<PartsDTO> findByFirmAndTypeOrdName(String firmName, String typeName) {
+        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdName(firmName, typeName);
+        return modelMapper.mapAll(partsEntities, PartsDTO.class);
+    }
+
+    @Override
+    public List<PartsDTO> findByFirmAndTypeOrdQuantity(String firmName, String typeName) {
+        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdQuantity(firmName, typeName);
+        return modelMapper.mapAll(partsEntities, PartsDTO.class);
+    }
 
     @Override
     public List<PartsDTO> findByFirmAndTypeOrdNameLike(String firmName, String typeName,String search) {
