@@ -76,24 +76,14 @@ public class PartController {
     }
 
     @GetMapping("{firmName}/{typeName}/Name")
-    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdName(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
-        return ResponseEntity.ok(partService.findByFirmAndTypeOrdName(firmName, typeName));
+    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdNameLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName, @RequestParam(required = false, defaultValue = "") String search) {
+        String s = "%" + search + "%";
+        return ResponseEntity.ok(partService.findByFirmAndTypeOrdNameLike(firmName, typeName, s));
     }
 
     @GetMapping("{firmName}/{typeName}/Quantity")
-    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdQuantity(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName) {
-        return ResponseEntity.ok(partService.findByFirmAndTypeOrdQuantity(firmName, typeName));
-    }
-
-    @GetMapping("{firmName}/{typeName}/Name/{search}")
-    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdNameLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName,@PathVariable("search") String search) {
-        String s="%"+search+"%";
-        return ResponseEntity.ok(partService.findByFirmAndTypeOrdNameLike(firmName, typeName,s));
-    }
-
-    @GetMapping("{firmName}/{typeName}/Quantity/{search}")
-    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdQuantityLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName,@PathVariable("search") String search) {
-        String s="%"+search+"%";
-        return ResponseEntity.ok(partService.findByFirmAndTypeOrdQuantityLike(firmName, typeName,s));
+    public ResponseEntity<List<PartsDTO>> getPartsByFirmAndTypeOrdQuantityLike(@PathVariable("firmName") String firmName, @PathVariable("typeName") String typeName, @RequestParam(required = false, defaultValue = "") String search) {
+        String s = "%" + search + "%";
+        return ResponseEntity.ok(partService.findByFirmAndTypeOrdQuantityLike(firmName, typeName, s));
     }
 }

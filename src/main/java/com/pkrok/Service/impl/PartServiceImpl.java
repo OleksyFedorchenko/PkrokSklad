@@ -63,26 +63,14 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public List<PartsDTO> findByFirmAndTypeOrdName(String firmName, String typeName) {
-        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdName(firmName, typeName);
+    public List<PartsDTO> findByFirmAndTypeOrdNameLike(String firmName, String typeName, String search) {
+        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdNameLike(firmName, typeName, search);
         return modelMapper.mapAll(partsEntities, PartsDTO.class);
     }
 
     @Override
-    public List<PartsDTO> findByFirmAndTypeOrdQuantity(String firmName, String typeName) {
-        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdQuantity(firmName, typeName);
-        return modelMapper.mapAll(partsEntities, PartsDTO.class);
-    }
-
-    @Override
-    public List<PartsDTO> findByFirmAndTypeOrdNameLike(String firmName, String typeName,String search) {
-        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdNameLike(firmName, typeName,search);
-        return modelMapper.mapAll(partsEntities, PartsDTO.class);
-    }
-
-    @Override
-    public List<PartsDTO> findByFirmAndTypeOrdQuantityLike(String firmName, String typeName,String search) {
-        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdQuantityLike(firmName, typeName,search);
+    public List<PartsDTO> findByFirmAndTypeOrdQuantityLike(String firmName, String typeName, String search) {
+        List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdQuantityLike(firmName, typeName, search);
         return modelMapper.mapAll(partsEntities, PartsDTO.class);
     }
 }
