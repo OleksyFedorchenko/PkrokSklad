@@ -1,6 +1,7 @@
 package com.pkrok.Service.impl;
 
 import com.pkrok.Exceptions.AlreadyExistsException;
+import com.pkrok.Exceptions.ResourceNotFoundException;
 import com.pkrok.Repository.PartRepository;
 import com.pkrok.Service.PartService;
 import com.pkrok.Domain.PartsDTO;
@@ -54,6 +55,12 @@ public class PartServiceImpl implements PartService {
     public List<PartsDTO> findAllPartsOrderByName() {
         List<PartEntity> partEntities = partRepository.findAllByOrderByNameAsc();
         return modelMapper.mapAll(partEntities, PartsDTO.class);
+    }
+
+    @Override
+    public void deletePartById(Long id) {
+        PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
+        partRepository.deleteById(id);
     }
 
     @Override

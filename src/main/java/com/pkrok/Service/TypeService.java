@@ -7,5 +7,7 @@ import java.util.List;
 public interface TypeService {
     void addType(TypeDTO typeDTO);
 
+    List<TypeDTO> findAllOrderById();
+
     List<TypeDTO> findAllTypes();
 }

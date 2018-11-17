@@ -7,5 +7,7 @@ import java.util.List;
 public interface FirmService {
     void addFirm(FirmDTO firmDTO);
 
+    List<FirmDTO> findAllOrderById();
+
     List<FirmDTO> findAllFirms();
 }

@@ -39,6 +39,6 @@ public class FirmController {
 
     @GetMapping
     public ResponseEntity<List<FirmDTO>> getFirms() {
-        return ResponseEntity.ok(firmService.findAllFirms());
+        return ResponseEntity.ok(firmService.findAllOrderById());
     }
 }

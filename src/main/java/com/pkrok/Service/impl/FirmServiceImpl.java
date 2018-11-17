@@ -28,6 +28,12 @@ public class FirmServiceImpl implements FirmService {
     }
 
     @Override
+    public List<FirmDTO> findAllOrderById() {
+        List<FirmEntity> firmEntities = firmRepository.findAllByOrderById();
+        return modelMapper.mapAll(firmEntities,FirmDTO.class);
+    }
+
+    @Override
     public List<FirmDTO> findAllFirms() {
         List<FirmEntity> firmEntities = firmRepository.findAll();
         return modelMapper.mapAll(firmEntities, FirmDTO.class);

@@ -35,6 +35,6 @@ public class TypeController {
 
     @GetMapping
     public ResponseEntity<List<TypeDTO>> getTypes() {
-        return ResponseEntity.ok(typeService.findAllTypes());
+        return ResponseEntity.ok(typeService.findAllOrderById());
     }
 }

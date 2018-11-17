@@ -15,6 +15,8 @@ public interface PartService {
 
     List<PartsDTO> findAllPartsOrderByName();
 
+    void deletePartById(Long id);
+
     List<PartsDTO> findAllPartsOrderByQuantity();
 
     List<PartsDTO> findByFirmAndTypeOrdNameLike(String firmName, String typeName, String search);
