@@ -58,6 +58,12 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
+    public PartsDTO findPartById(Long id) {
+        PartEntity partEntity=partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
+        return modelMapper.map(partEntity,PartsDTO.class);
+    }
+
+    @Override
     public void deletePartById(Long id) {
         PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
         partRepository.deleteById(id);

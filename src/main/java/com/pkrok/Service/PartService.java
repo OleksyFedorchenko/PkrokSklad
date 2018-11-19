@@ -15,6 +15,8 @@ public interface PartService {
 
     List<PartsDTO> findAllPartsOrderByName();
 
+    PartsDTO findPartById(Long id);
+
     void deletePartById(Long id);
 
     List<PartsDTO> findAllPartsOrderByQuantity();

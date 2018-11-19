@@ -86,4 +86,15 @@ public class PartController {
         String s = "%" + search + "%";
         return ResponseEntity.ok(partService.findByFirmAndTypeOrdQuantityLike(firmName, typeName, s));
     }
+
+    @GetMapping("{partId}")
+    public ResponseEntity<PartsDTO> getPartById(@PathVariable("partId") Long id){
+        return ResponseEntity.ok(partService.findPartById(id));
+    }
+
+    @DeleteMapping("{partId}")
+    public ResponseEntity<?> deletePartById(@PathVariable("partId") Long id){
+        partService.deletePartById(id);
+        return new  ResponseEntity<Void>(HttpStatus.OK);
+    }
 }
