@@ -64,6 +64,20 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
+    public void setPartById(PartsDTO partDTO) {
+        PartEntity part = partRepository.findById(partDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
+        part.setName(partDTO.getName());
+        part.setQuantity(partDTO.getQuantity());
+        part.setPlace(partDTO.getPlace());
+        part.setDescription(partDTO.getDescription());
+        part.setFirm(partDTO.getFirm());
+        part.setType(partDTO.getType());
+        partRepository.save(part);
+        part= modelMapper.map(partDTO, PartEntity.class);
+        partRepository.save(part);
+    }
+
+    @Override
     public void deletePartById(Long id) {
         PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
         partRepository.deleteById(id);

@@ -42,6 +42,13 @@ public class PartController {
         return new ResponseEntity<Void>(HttpStatus.CREATED); //201
     }
 
+    @PostMapping("edit")
+    public ResponseEntity<?> editPart(@RequestBody PartsDTO part) {
+        System.out.println(part);
+        partService.setPartById(part);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<PartsDTO>> getParts() {
         return ResponseEntity.ok(partService.findAllParts());

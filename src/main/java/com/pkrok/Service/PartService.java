@@ -1,7 +1,11 @@
 package com.pkrok.Service;
 
+import com.pkrok.Domain.FirmDTO;
 import com.pkrok.Domain.PartsDTO;
+import com.pkrok.Domain.TypeDTO;
+import com.pkrok.Entity.TypeEntity;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface PartService {
@@ -16,6 +20,8 @@ public interface PartService {
     List<PartsDTO> findAllPartsOrderByName();
 
     PartsDTO findPartById(Long id);
+
+    void setPartById(PartsDTO partDTO);
 
     void deletePartById(Long id);
 
