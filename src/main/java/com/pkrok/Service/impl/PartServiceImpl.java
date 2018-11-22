@@ -72,6 +72,7 @@ public class PartServiceImpl implements PartService {
         part.setDescription(partDTO.getDescription());
         part.setFirm(partDTO.getFirm());
         part.setType(partDTO.getType());
+        part.setImage(partDTO.getImage());
         part = modelMapper.map(partDTO, PartEntity.class);
         partRepository.save(part);
     }
