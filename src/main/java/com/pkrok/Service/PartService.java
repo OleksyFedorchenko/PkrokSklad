@@ -30,4 +30,6 @@ public interface PartService {
     List<PartsDTO> findByFirmAndTypeOrdNameLike(String firmName, String typeName, String search);
 
     List<PartsDTO> findByFirmAndTypeOrdQuantityLike(String firmName, String typeName, String search);
+
+    void addImageToProduct(String image, Long id);
 }

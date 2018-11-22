@@ -99,4 +99,13 @@ public class PartServiceImpl implements PartService {
         List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdQuantityLike(firmName, typeName, search);
         return modelMapper.mapAll(partsEntities, PartsDTO.class);
     }
+    @Override
+    public void addImageToProduct(String image, Long id) {
+        PartEntity partEntity = partRepository.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Product with id [" + id + "] not found")
+                );
+        partEntity.setImage(image);
+        partRepository.save(partEntity);
+    }
 }
