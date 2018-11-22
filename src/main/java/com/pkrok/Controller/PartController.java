@@ -100,14 +100,14 @@ public class PartController {
     }
 
     @GetMapping("{partId}")
-    public ResponseEntity<PartsDTO> getPartById(@PathVariable("partId") Long id){
+    public ResponseEntity<PartsDTO> getPartById(@PathVariable("partId") Long id) {
         return ResponseEntity.ok(partService.findPartById(id));
     }
 
     @DeleteMapping("{partId}")
-    public ResponseEntity<?> deletePartById(@PathVariable("partId") Long id){
+    public ResponseEntity<?> deletePartById(@PathVariable("partId") Long id) {
         partService.deletePartById(id);
-        return new  ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @PostMapping("{productId}/image")

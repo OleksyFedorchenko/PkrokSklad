@@ -59,8 +59,8 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public PartsDTO findPartById(Long id) {
-        PartEntity partEntity=partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
-        return modelMapper.map(partEntity,PartsDTO.class);
+        PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
+        return modelMapper.map(partEntity, PartsDTO.class);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class PartServiceImpl implements PartService {
         part.setDescription(partDTO.getDescription());
         part.setFirm(partDTO.getFirm());
         part.setType(partDTO.getType());
-        part= modelMapper.map(partDTO, PartEntity.class);
+        part = modelMapper.map(partDTO, PartEntity.class);
         partRepository.save(part);
     }
 
@@ -99,6 +99,7 @@ public class PartServiceImpl implements PartService {
         List<PartEntity> partsEntities = partRepository.findByFirmAndTypeOrdQuantityLike(firmName, typeName, search);
         return modelMapper.mapAll(partsEntities, PartsDTO.class);
     }
+
     @Override
     public void addImageToProduct(String image, Long id) {
         PartEntity partEntity = partRepository.findById(id)

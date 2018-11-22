@@ -30,7 +30,7 @@ public class FirmServiceImpl implements FirmService {
     @Override
     public List<FirmDTO> findAllOrderById() {
         List<FirmEntity> firmEntities = firmRepository.findAllByOrderById();
-        return modelMapper.mapAll(firmEntities,FirmDTO.class);
+        return modelMapper.mapAll(firmEntities, FirmDTO.class);
     }
 
     @Override

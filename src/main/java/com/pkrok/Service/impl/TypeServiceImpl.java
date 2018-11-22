@@ -30,7 +30,7 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public List<TypeDTO> findAllOrderById() {
         List<TypeEntity> typeEntities = typeRepository.findAllByOrderById();
-        return modelMapper.mapAll(typeEntities,TypeDTO.class);
+        return modelMapper.mapAll(typeEntities, TypeDTO.class);
     }
 
     @Override
