@@ -27,7 +27,7 @@ public class PartServiceImpl implements PartService {
     public void addPart(PartsDTO partDTO) {
         PartEntity partEntity = partRepository.findByName(partDTO.getName());
         if (partEntity != null) {
-            throw new AlreadyExistsException("Product with name [" + partDTO.getName() + "]already exists");
+            throw new AlreadyExistsException("Part with name [" + partDTO.getName() + "]already exists");
         }
         PartEntity part = modelMapper.map(partDTO, PartEntity.class);
         partRepository.save(part);
@@ -73,6 +73,10 @@ public class PartServiceImpl implements PartService {
         part.setFirm(partDTO.getFirm());
         part.setType(partDTO.getType());
         part.setImage(partDTO.getImage());
+        partRepository.findByName(part.getName());
+        if(part!=null){
+            throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
+        }
         part = modelMapper.map(partDTO, PartEntity.class);
         partRepository.save(part);
     }
