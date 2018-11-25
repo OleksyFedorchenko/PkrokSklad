@@ -73,8 +73,8 @@ public class PartServiceImpl implements PartService {
         part.setFirm(partDTO.getFirm());
         part.setType(partDTO.getType());
         part.setImage(partDTO.getImage());
-        partRepository.findByName(part.getName());
-        if (part != null) {
+        PartEntity part1 = partRepository.findByName(part.getName());
+        if (part1 != null) {
             throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
         }
         part = modelMapper.map(partDTO, PartEntity.class);
