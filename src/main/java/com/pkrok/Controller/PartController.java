@@ -125,9 +125,12 @@ public class PartController {
     public ResponseEntity<?> getFile(
             @RequestParam("fileName") String fileName,
             HttpServletRequest request) {
-
-        Resource resource = fileStorageService.loadFile(fileName);
-
+        Resource resource;
+        if(fileName.equals("null")){
+            resource = fileStorageService.loadFile("empty.png");
+        }else {
+            resource = fileStorageService.loadFile(fileName);
+        }
         String contentType = null;
 
         try {
