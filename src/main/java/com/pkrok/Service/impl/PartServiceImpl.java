@@ -1,11 +1,11 @@
 package com.pkrok.Service.impl;
 
+import com.pkrok.Domain.PartsDTO;
+import com.pkrok.Entity.PartEntity;
 import com.pkrok.Exceptions.AlreadyExistsException;
 import com.pkrok.Exceptions.ResourceNotFoundException;
 import com.pkrok.Repository.PartRepository;
 import com.pkrok.Service.PartService;
-import com.pkrok.Domain.PartsDTO;
-import com.pkrok.Entity.PartEntity;
 import com.pkrok.Utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,7 +74,7 @@ public class PartServiceImpl implements PartService {
         part.setType(partDTO.getType());
         part.setImage(partDTO.getImage());
         partRepository.findByName(part.getName());
-        if(part!=null){
+        if (part != null) {
             throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
         }
         part = modelMapper.map(partDTO, PartEntity.class);
