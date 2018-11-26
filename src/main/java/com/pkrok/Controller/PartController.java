@@ -60,6 +60,12 @@ public class PartController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    @PostMapping("quantity/{id}/{plus}/{minus}")
+    public ResponseEntity<Void> editQuantityById(@PathVariable("id") Long id, @PathVariable("plus") int plus, @PathVariable("minus") int minus){
+        partService.setQuantityById(id,plus,minus);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<PartsDTO>> getParts() {
         return ResponseEntity.ok(partService.findAllParts());

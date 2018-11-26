@@ -32,4 +32,6 @@ public interface PartService {
     List<PartsDTO> findByFirmAndTypeOrdQuantityLike(String firmName, String typeName, String search);
 
     void addImageToProduct(String image, Long id);
+
+    void setQuantityById(Long id, int plus, int minus);
 }
