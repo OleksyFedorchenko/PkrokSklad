@@ -119,9 +119,7 @@ public class PartServiceImpl implements PartService {
     public void setQuantityById(Long id, int plus, int minus) {
         PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Part with this id not found"));
         int quantityBeforeEdit = partEntity.getQuantity();
-        partEntity.setQuantity(quantityBeforeEdit+plus);
-        quantityBeforeEdit=partEntity.getQuantity();
-        partEntity.setQuantity(quantityBeforeEdit-minus);
+        partEntity.setQuantity(quantityBeforeEdit+plus-minus);
         partRepository.save(partEntity);
     }
 }
