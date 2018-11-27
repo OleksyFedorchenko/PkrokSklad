@@ -40,10 +40,11 @@ public class TypeServiceImpl implements TypeService {
         TypeEntity type = typeRepository.findById(typeDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
         type.setName(typeDTO.getName());
         TypeEntity type1 = typeRepository.findByName(type.getName());
-        if (type1 != null){
-            if(type1.getName()!=type.getName()) {
+        if (type1 != null) {
+            if (type1.getName() != type.getName()) {
                 throw new AlreadyExistsException("Type with name [" + type.getName() + "]already exists");
-            }}
+            }
+        }
         type = modelMapper.map(typeDTO, TypeEntity.class);
         typeRepository.save(type);
     }

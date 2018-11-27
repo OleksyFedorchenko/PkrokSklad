@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface TypeRepository extends JpaRepository<TypeEntity, Long> {
     List<TypeEntity> findAllByOrderById();
+
     TypeEntity findByName(String name);
 }

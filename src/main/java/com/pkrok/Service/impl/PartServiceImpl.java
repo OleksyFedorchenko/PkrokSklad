@@ -74,10 +74,11 @@ public class PartServiceImpl implements PartService {
         part.setType(partDTO.getType());
         part.setImage(partDTO.getImage());
         PartEntity part1 = partRepository.findByName(part.getName());
-        if (part1 != null){
-            if (part1.getName()!=part.getName()) {
-            throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
-        }}
+        if (part1 != null) {
+            if (part1.getName() != part.getName()) {
+                throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
+            }
+        }
         part = modelMapper.map(partDTO, PartEntity.class);
         partRepository.save(part);
     }
@@ -120,7 +121,7 @@ public class PartServiceImpl implements PartService {
     public void setQuantityById(Long id, int plus, int minus) {
         PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Part with this id not found"));
         int quantityBeforeEdit = partEntity.getQuantity();
-        partEntity.setQuantity(quantityBeforeEdit+plus-minus);
+        partEntity.setQuantity(quantityBeforeEdit + plus - minus);
         partRepository.save(partEntity);
     }
 }

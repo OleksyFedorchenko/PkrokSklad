@@ -61,8 +61,8 @@ public class PartController {
     }
 
     @PostMapping("quantity/{id}/{plus}/{minus}")
-    public ResponseEntity<Void> editQuantityById(@PathVariable("id") Long id, @PathVariable("plus") int plus, @PathVariable("minus") int minus){
-        partService.setQuantityById(id,plus,minus);
+    public ResponseEntity<Void> editQuantityById(@PathVariable("id") Long id, @PathVariable("plus") int plus, @PathVariable("minus") int minus) {
+        partService.setQuantityById(id, plus, minus);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -132,9 +132,9 @@ public class PartController {
             @RequestParam("fileName") String fileName,
             HttpServletRequest request) {
         Resource resource;
-        if(fileName.equals("null")){
+        if (fileName.equals("null")) {
             resource = fileStorageService.loadFile("empty.png");
-        }else {
+        } else {
             resource = fileStorageService.loadFile(fileName);
         }
         String contentType = null;

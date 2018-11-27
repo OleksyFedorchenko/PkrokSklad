@@ -58,10 +58,11 @@ public class FirmServiceImpl implements FirmService {
         FirmEntity firm = firmRepository.findById(firmDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
         firm.setName(firmDTO.getName());
         FirmEntity firm1 = firmRepository.findByName(firm.getName());
-        if (firm1 != null){
-            if(firm1.getName()!=firm.getName()) {
-            throw new AlreadyExistsException("Firm with name [" + firm.getName() + "]already exists");
-        }}
+        if (firm1 != null) {
+            if (firm1.getName() != firm.getName()) {
+                throw new AlreadyExistsException("Firm with name [" + firm.getName() + "]already exists");
+            }
+        }
         firm = modelMapper.map(firmDTO, FirmEntity.class);
         firmRepository.save(firm);
     }
