@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface FirmRepository extends JpaRepository<FirmEntity, Long> {
     List<FirmEntity> findAllByOrderById();
+    FirmEntity findByName(String name);
 }

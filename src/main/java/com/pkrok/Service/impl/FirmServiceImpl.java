@@ -1,5 +1,7 @@
 package com.pkrok.Service.impl;
 
+import com.pkrok.Exceptions.AlreadyExistsException;
+import com.pkrok.Exceptions.ResourceNotFoundException;
 import com.pkrok.Repository.FirmRepository;
 import com.pkrok.Service.FirmService;
 import com.pkrok.Domain.FirmDTO;
@@ -37,5 +39,30 @@ public class FirmServiceImpl implements FirmService {
     public List<FirmDTO> findAllFirms() {
         List<FirmEntity> firmEntities = firmRepository.findAll();
         return modelMapper.mapAll(firmEntities, FirmDTO.class);
+    }
+
+    @Override
+    public void deleteFirmById(Long id) {
+        FirmEntity firmEntity = firmRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete product with id[" + id + "]not found"));
+        firmRepository.deleteById(id);
+    }
+
+    @Override
+    public FirmDTO findFirmById(Long id) {
+        FirmEntity firmEntity = firmRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete firm with id[" + id + "]not found"));
+        return modelMapper.map(firmEntity, FirmDTO.class);
+    }
+
+    @Override
+    public void setFirmById(FirmDTO firmDTO) {
+        FirmEntity firm = firmRepository.findById(firmDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
+        firm.setName(firmDTO.getName());
+        FirmEntity firm1 = firmRepository.findByName(firm.getName());
+        if (firm1 != null){
+            if(firm1.getName()!=firm.getName()) {
+            throw new AlreadyExistsException("Firm with name [" + firm.getName() + "]already exists");
+        }}
+        firm = modelMapper.map(firmDTO, FirmEntity.class);
+        firmRepository.save(firm);
     }
 }

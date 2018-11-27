@@ -1,5 +1,7 @@
 package com.pkrok.Service.impl;
 
+import com.pkrok.Exceptions.AlreadyExistsException;
+import com.pkrok.Exceptions.ResourceNotFoundException;
 import com.pkrok.Repository.TypeRepository;
 import com.pkrok.Service.TypeService;
 import com.pkrok.Domain.TypeDTO;
@@ -25,6 +27,31 @@ public class TypeServiceImpl implements TypeService {
     public void addType(TypeDTO typeDTO) {
         TypeEntity type = modelMapper.map(typeDTO, TypeEntity.class);
         typeRepository.save(type);
+    }
+
+    @Override
+    public TypeDTO findTypeById(Long id) {
+        TypeEntity typeEntity = typeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete type with id[" + id + "]not found"));
+        return modelMapper.map(typeEntity, TypeDTO.class);
+    }
+
+    @Override
+    public void setTypeById(TypeDTO typeDTO) {
+        TypeEntity type = typeRepository.findById(typeDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
+        type.setName(typeDTO.getName());
+        TypeEntity type1 = typeRepository.findByName(type.getName());
+        if (type1 != null){
+            if(type1.getName()!=type.getName()) {
+                throw new AlreadyExistsException("Type with name [" + type.getName() + "]already exists");
+            }}
+        type = modelMapper.map(typeDTO, TypeEntity.class);
+        typeRepository.save(type);
+    }
+
+    @Override
+    public void deleteTypeById(Long id) {
+        TypeEntity typeEntity = typeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not delete type with id[" + id + "]not found"));
+        typeRepository.deleteById(id);
     }
 
     @Override

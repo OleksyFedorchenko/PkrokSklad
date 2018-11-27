@@ -37,6 +37,31 @@ public class FirmController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+    @PostMapping("edit")
+    public ResponseEntity<?> editFirm(@Valid @RequestBody FirmDTO firm, BindingResult br) {
+        if (br.hasErrors()) {
+            System.out.println("Validation error");
+            String errMsg = br.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .findFirst().get().toString();
+            ErrorDTO errorDTO = new ErrorDTO(errMsg);
+            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+        }
+        firmService.setFirmById(firm);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @GetMapping("{firmId}")
+    public ResponseEntity<FirmDTO> getPartById(@PathVariable("firmId") Long id) {
+        return ResponseEntity.ok(firmService.findFirmById(id));
+    }
+
+    @DeleteMapping("{firmId}")
+    public ResponseEntity<?> deletePartById(@PathVariable("firmId") Long id) {
+        firmService.deleteFirmById(id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<FirmDTO>> getFirms() {
         return ResponseEntity.ok(firmService.findAllOrderById());
