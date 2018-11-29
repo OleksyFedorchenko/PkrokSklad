@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
@@ -18,40 +19,41 @@
 }
     </style>
 </head>
+
 <body>
-   <img src="login.png" class="center">
+    <img src="login.png" class="center">
     <form align='center' id='signinForm'>
 
-            <label id="errorMessage" style="color: red"></label>
-            <label style="font-weight: bold">Введіть логін</label>
-            <input name="user" style="text-align: center" type="text" autofocus id="username">
-            <label style="font-weight: bold">Введіть пароль</label>
-            <input name="pass" style="text-align: center" type="password" autofocus id="password">
-            <br>
-            <br>
-            <input class="button" type="Submit" value="OK">
-        </form>
-        <div align="center">
+        <label id="errorMessage" style="color: red"></label>
+        <label style="font-weight: bold">Введіть логін</label>
+        <input name="user" style="text-align: center" type="text" autofocus id="username">
+        <label style="font-weight: bold">Введіть пароль</label>
+        <input name="pass" style="text-align: center" type="password" autofocus id="password">
+        <br>
+        <br>
+        <input class="button" type="Submit" value="OK">
+    </form>
+    <div align="center">
         <FONT SIZE=2 color="#888888"><a href="register.html" style="font-family: Exo2">Реєстрація</a></FONT>
     </div>
-    
+
     <script src="js/jquery.min.js"></script>
     <script src="js/global.js"></script>
     <script>
-          $(document).ready(function() {
+        $(document).ready(function() {
             $('#signinForm').submit(function(e) {
                 e.preventDefault();
                 signin();
             });
         });
-        
+
         function signin() {
             let user = {
                 username: $('#username').val(),
                 password: $('#password').val()
             };
             $.ajax({
-                url: serverURL+'auth/signin',
+                url: serverURL + 'auth/signin',
                 method: 'POST',
                 data: JSON.stringify(user),
                 contentType: 'application/json',
@@ -61,20 +63,22 @@
                         let token = res.responseJSON.token;
                         console.log(token);
                         window.localStorage.setItem('auth_token', token);
-                        
+
                         //console.log(parseJwt(token));
                         let role = parseJwt(token).auth;
                         console.log(role);
                         window.localStorage.setItem('role', role);
                         window.location.href = 'index.html';
-                    }else{
-                         $('#errorMessage').html("Login or password is incorrect");
+                    } else {
+                        $('#errorMessage').html("Login or password is incorrect");
                         document.getElementById('signinForm').reset();
                         $('#username').focus();
                     }
                 }
             })
         }
+
     </script>
 </body>
+
 </html>

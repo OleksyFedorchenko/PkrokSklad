@@ -174,7 +174,7 @@
 
 
                 $('#admin').on('click', function(e) {
-                    if(window.localStorage.getItem('role').includes('ROLE_ADMIN')){
+                    if (window.localStorage.getItem('role').includes('ROLE_ADMIN')) {
                         window.location.href = 'adminpage.html';
                     }
                 });
@@ -223,14 +223,15 @@
 
                 });
 
-                $(document).on('mouseover', '#partsTable tbody tr', function(e) {
+                $(document).on('mouseenter', '#partsTable tbody tr', function(e) {
                     let partImage = $(this).children('td:last-child').text();
-                    $('#partImg').attr("src",serverURL+"parts/image?fileName="+partImage);
-                    
+                    console.log(partImage);
+                    $('#partImg').attr("src", serverURL + "parts/image?fileName=" + partImage);
+
                 });
 
-                $(document).on('mouseout', '#partsTable tbody tr', function(e) {
-                    $('#partImg').attr("src", serverURL+"parts/image?fileName=empty.png");
+                $(document).on('mouseleave', '#partsTable tbody tr', function(e) {
+                    $('#partImg').attr("src", serverURL + "parts/image?fileName=empty.png");
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
@@ -282,6 +283,7 @@
                 }, 20);
             }
             $('#errorMessage').hide();
+            $('#nameAdd').focus();
         }
 
         function closeAdd() {
@@ -507,7 +509,7 @@
                 }
             });
         }
-       
+
 
         function editPart() {
 

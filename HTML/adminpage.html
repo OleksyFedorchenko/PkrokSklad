@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Warehouse-AdminPage</title>
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         @font-face {
             font-family: Exo2;
@@ -15,16 +16,17 @@
                    color: RED;}
     </style>
 </head>
+
 <body>
-     <div id="p_prldr">
+    <div id="p_prldr">
         <div class="contpre"><span class="svg_anm"></span>
             <br>Зачекайте
             <br><small>сторінка завантажується</small></div>
     </div>
 
     <img src="background1.jpg" width="100%" height="169px">
-   
-        <div class="view">
+
+    <div class="view">
         <table class="table_blur" id="firmstypesTable">
             <thead>
                 <tr>
@@ -51,8 +53,8 @@
 
         </div>
     </div>
-   
-       
+
+
     <div style="text-align: center" id="popupWin" class="modalwin3">
         <label style="font-size: 18pt"> Додати позицію: </label>
         <br>
@@ -67,7 +69,7 @@
             <input class="cancelbutton" id="cancelAdd" type="button" value="Cancel">
         </form>
     </div>
-    
+
     <div style="text-align: center" id="popupWin2" class="modalwin4">
         <label style="font-size: 18pt"> Редагувати позицію: </label>
         <br>
@@ -82,14 +84,14 @@
             <input class="cancelbutton" id="cancelEdit" type="button" value="Cancel">
         </form>
     </div>
-    
-    
+
+
     <hr />
     <div align="center">
         <FONT SIZE=2 color="#888888">Copyright @ 2018-2019, Oleksy Fedorchenko <a href="index.html" style="font-family: Exo2">user</a></FONT>
         <input class="cancelbutton" id="logoutBtn" type="button" value="Logout">
     </div>
-    
+
     <script src="js/jquery.min.js"></script>
     <script src="js/global.js"></script>
     <script>
@@ -100,69 +102,69 @@
         boxEdit.addClass('visuallyhidden');
         boxEdit.addClass('hidden');
         $(document).ready(function() {
-            
+
             if (token) {
 
-            
-            getTable();
-        
-        
-        $(document).on('change', '#tableselect', function(e) {
-            getTable();
-        });
-        
-        $(document).on('click', '#addPosition', function(e) {
-            showAdd();
-        });
-        
-        $(document).on('click', '#cancelAdd', function(e) {
-            closeAdd();
-        });
-        
-        $(document).on('click', '#okAdd', function(e) {
-            addPosition();
-        });
-        
-        $(document).on('click', '#okEdit', function(e) {
-            editPosition();
-        });
-        
-        $(document).on('click', '#cancelEdit', function(e) {
-            closeEdit();
-        });
-        
-        $(document).on('click', '#firmstypesTable tbody button.btn-delete', function(e) {
-            var r = confirm("Delete part?");
-            if (r == true) {
-                console.log(e.target.id);
-                let elementId = e.target.id;
-                let positionId = elementId.split('-')[1];
-                console.log(positionId);
-                deletePosition(positionId);
-            }
-        });
-        
+
+                getTable();
+
+
+                $(document).on('change', '#tableselect', function(e) {
+                    getTable();
+                });
+
+                $(document).on('click', '#addPosition', function(e) {
+                    showAdd();
+                });
+
+                $(document).on('click', '#cancelAdd', function(e) {
+                    closeAdd();
+                });
+
+                $(document).on('click', '#okAdd', function(e) {
+                    addPosition();
+                });
+
+                $(document).on('click', '#okEdit', function(e) {
+                    editPosition();
+                });
+
+                $(document).on('click', '#cancelEdit', function(e) {
+                    closeEdit();
+                });
+
+                $(document).on('click', '#firmstypesTable tbody button.btn-delete', function(e) {
+                    var r = confirm("Delete part?");
+                    if (r == true) {
+                        console.log(e.target.id);
+                        let elementId = e.target.id;
+                        let positionId = elementId.split('-')[1];
+                        console.log(positionId);
+                        deletePosition(positionId);
+                    }
+                });
+
                 $('#logoutBtn').on('click', function(e) {
                     window.localStorage.removeItem('auth_token');
                     window.localStorage.removeItem('role');
                     window.location.reload();
                 });
-                
-        $(document).on('click', '#firmstypesTable tbody button.btn-edit', function(e) {
-            console.log(e.target.id);
-            let elementId = e.target.id;
-            let positionId = elementId.split('-')[1];
-            console.log(positionId);
-            showEdit(positionId);
-        });}
-                else{
-                    $('#logoutBtn').hide();
-                window.location.href = 'login.html';
-                }
-                
+
+                $(document).on('click', '#firmstypesTable tbody button.btn-edit', function(e) {
+                    console.log(e.target.id);
+                    let elementId = e.target.id;
+                    let positionId = elementId.split('-')[1];
+                    console.log(positionId);
+                    showEdit(positionId);
                 });
-        
-        
+            } else {
+                $('#logoutBtn').hide();
+                window.location.href = 'login.html';
+            }
+
+        });
+
+
         function showAdd() {
             if (boxAdd.hasClass('hidden')) {
                 boxAdd.removeClass('hidden');
@@ -172,7 +174,7 @@
             }
             $('#errorMessage').hide();
         }
-        
+
         function closeAdd() {
             boxAdd.addClass('visuallyhidden');
             boxAdd.one('transitionend', function(e) {
@@ -180,7 +182,7 @@
             });
             document.getElementById('pop').reset();
         }
-        
+
         function showEdit(positionId) {
             if (boxEdit.hasClass('hidden')) {
                 boxEdit.removeClass('hidden');
@@ -191,7 +193,7 @@
             $('#errorMessageEdit').hide();
             getPositionById(positionId);
         }
-        
+
         function closeEdit() {
             boxEdit.addClass('visuallyhidden');
             boxEdit.one('transitionend', function(e) {
@@ -199,16 +201,16 @@
             });
             document.getElementById('pop2').reset();
         }
-        
+
         function getTable() {
             let table = $('#tableselect').val();
             let urlplus;
-            switch(table) {
-                case '1':  // if (x === 'value1')
-                    urlplus="firms";
+            switch (table) {
+                case '1': // if (x === 'value1')
+                    urlplus = "firms";
                     break;
-                case '2':  // if (x === 'value2')
-                    urlplus="types";
+                case '2': // if (x === 'value2')
+                    urlplus = "types";
                     break;
             }
             $.ajax({
@@ -237,16 +239,16 @@
                 }
             });
         }
-        
+
         function addPosition() {
             let table = $('#tableselect').val();
             let urlplus;
-            switch(table) {
-                case '1':  // if (x === 'value1')
-                    urlplus="firms";
+            switch (table) {
+                case '1': // if (x === 'value1')
+                    urlplus = "firms";
                     break;
-                case '2':  // if (x === 'value2')
-                    urlplus="types";
+                case '2': // if (x === 'value2')
+                    urlplus = "types";
                     break;
             }
             let name = $('#nameAdd').val();
@@ -254,7 +256,7 @@
                 name: name,
             };
             $.ajax({
-                url: serverURL+urlplus,
+                url: serverURL + urlplus,
                 method: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',
@@ -278,20 +280,20 @@
                 }
             })
         }
-        
-         function deletePosition(positionId) {
-             let table = $('#tableselect').val();
+
+        function deletePosition(positionId) {
+            let table = $('#tableselect').val();
             let urlplus;
-            switch(table) {
-                case '1':  // if (x === 'value1')
-                    urlplus="firms";
+            switch (table) {
+                case '1': // if (x === 'value1')
+                    urlplus = "firms";
                     break;
-                case '2':  // if (x === 'value2')
-                    urlplus="types";
+                case '2': // if (x === 'value2')
+                    urlplus = "types";
                     break;
             }
             $.ajax({
-                url: serverURL+urlplus+'/' + positionId,
+                url: serverURL + urlplus + '/' + positionId,
                 method: 'DELETE',
                 success: function(response) {
                     console.log(response);
@@ -300,16 +302,16 @@
                 }
             });
         }
-        
+
         function editPosition() {
             let table = $('#tableselect').val();
             let urlplus;
-            switch(table) {
-                case '1':  // if (x === 'value1')
-                    urlplus="firms";
+            switch (table) {
+                case '1': // if (x === 'value1')
+                    urlplus = "firms";
                     break;
-                case '2':  // if (x === 'value2')
-                    urlplus="types";
+                case '2': // if (x === 'value2')
+                    urlplus = "types";
                     break;
             }
             let position = {
@@ -318,7 +320,7 @@
             };
             console.log(position);
             $.ajax({
-                url: serverURL+urlplus+'/edit',
+                url: serverURL + urlplus + '/edit',
                 method: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',
@@ -341,21 +343,21 @@
                 }
             })
         }
-        
+
         function getPositionById(positionId) {
             let table = $('#tableselect').val();
             let urlplus;
-            switch(table) {
-                case '1':  // if (x === 'value1')
-                    urlplus="firms";
+            switch (table) {
+                case '1': // if (x === 'value1')
+                    urlplus = "firms";
                     break;
-                case '2':  // if (x === 'value2')
-                    urlplus="types";
+                case '2': // if (x === 'value2')
+                    urlplus = "types";
                     break;
             }
             console.log(positionId);
             $.ajax({
-                url: serverURL + urlplus+'/' + positionId,
+                url: serverURL + urlplus + '/' + positionId,
                 method: 'GET',
                 dataType: 'json',
                 contentType: 'application/json',
@@ -367,9 +369,8 @@
             });
         }
 
-
     </script>
-    
+
     <script type="text/javascript">
         $(window).on('load', function() {
             var $preloader = $('#p_prldr'),
@@ -380,4 +381,5 @@
 
     </script>
 </body>
+
 </html>
