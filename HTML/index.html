@@ -225,11 +225,12 @@
 
                 $(document).on('mouseover', '#partsTable tbody tr', function(e) {
                     let partImage = $(this).children('td:last-child').text();
-                    $('#partImg').attr("src", "http://localhost:8080/parts/image?fileName=" + partImage);
+                    $('#partImg').attr("src",serverURL+"parts/image?fileName="+partImage);
+                    
                 });
 
                 $(document).on('mouseout', '#partsTable tbody tr', function(e) {
-                    $('#partImg').attr("src", "http://localhost:8080/parts/image?fileName=empty.png");
+                    $('#partImg').attr("src", serverURL+"parts/image?fileName=empty.png");
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
@@ -506,6 +507,7 @@
                 }
             });
         }
+       
 
         function editPart() {
 
@@ -516,7 +518,6 @@
                 place: $('#placeEdit').val(),
                 price: $('#priceEdit').val(),
                 description: $('#descriptionEdit').val(),
-                image: $('#imgEdit').val(),
                 firm: {
                     id: $('#firmEdit').val(),
                 },
@@ -534,7 +535,6 @@
                 complete: function(response) {
                     if (response.status == 200) {
                         $('#errorMessageEdit').hide();
-                        $('#partsTable tbody').empty();
                     }
                     if (response.status == 400) {
                         $('#errorMessageEdit').html(response.responseJSON.message);

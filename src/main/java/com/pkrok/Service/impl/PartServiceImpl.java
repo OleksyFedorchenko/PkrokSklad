@@ -72,7 +72,6 @@ public class PartServiceImpl implements PartService {
         part.setDescription(partDTO.getDescription());
         part.setFirm(partDTO.getFirm());
         part.setType(partDTO.getType());
-        part.setImage(partDTO.getImage());
         PartEntity part1 = partRepository.findByName(part.getName());
         if (part1 != null) {
             if (!part1.getName().equals(part.getName())) {
