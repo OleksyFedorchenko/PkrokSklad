@@ -1,0 +1,260 @@
+a{
+    cursor: url(cursor/LinkSelect.cur),pointer;
+}
+html{
+    cursor: url(cursor/NormalSelect.cur),default;
+}
+body {
+    margin: 0;
+    cursor: url(cursor/NormalSelect.cur), default;
+    background: url(background.jpg);
+}
+
+th,
+td,
+select,
+input,
+label {
+    font-family: Exo2;
+}
+
+td {
+    font-style: italic;
+    font-size: small;
+}
+
+select {
+    font-family: Exo2;
+    color: white;
+    background-color: #3068a5;
+    width: 180px;
+    height: 30px;
+    border: 1px solid
+}
+
+button {
+    font-family: Exo2;
+    color: white;
+    background-color: #3068a5;
+    width: 100px;
+    height: 26px;
+    border: 1px solid
+}
+
+input {
+    cursor: url(cursor/TextSelect.cur), text;
+    font-family: Exo2;
+    color: white;
+    background-color: #3068a5;
+    width: 180px;
+    height: 26px;
+    border: 1px solid
+}
+
+label,
+select {
+    cursor: url(cursor/NormalSelect.cur), default;
+}
+
+.button,
+.btn-edit {
+    background-color: darkgreen;
+    cursor: url(cursor/LinkSelect.cur), pointer;
+}
+
+.cancelbutton,
+.btn-delete {
+    cursor: url(cursor/LinkSelect.cur), pointer;
+    background-color: darkred;
+}
+
+select,
+input,
+button {
+    border-radius: 10px;
+}
+
+.view {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu1 {
+    display: block;
+}
+
+select,
+label {
+    display: block;
+}
+
+.sa1,
+.sa2 {
+    margin-left: 60px;
+}
+
+.img,
+.menu1 {
+    position: sticky;
+    top: 0;
+    height: 20%;
+    width: 20%;
+}
+
+.img {
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #2B1015;
+}
+
+
+.table_blur {
+    background: #f5ffff;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.table_blur th {
+    border-top: 1px solid #777777;
+    border-bottom: 1px solid #777777;
+    box-shadow: inset 0 1px 0 #999999, inset 0 -1px 0 #999999;
+    background: linear-gradient(#01b1e2, #5a567f);
+    color: white;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.table_blur th:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 25%;
+    height: 25%;
+    width: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .08));
+}
+
+.table_blur tr:nth-child(odd) {
+    background: #ebf3f9;
+}
+
+.table_blur th:first-child {
+    border-left: 1px solid #777777;
+    border-bottom: 1px solid #777777;
+    box-shadow: inset 1px 1px 0 #999999, inset 0 -1px 0 #999999;
+}
+
+.table_blur th:last-child {
+    border-right: 1px solid #777777;
+    border-bottom: 1px solid #777777;
+    box-shadow: inset -1px 1px 0 #999999, inset 0 -1px 0 #999999;
+}
+
+.table_blur td {
+    border: 1px solid #e3eef7;
+    padding: 10px 15px;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.table_blur tbody:hover td {
+    color: transparent;
+    text-shadow: 0 0 3px #a09f9d;
+}
+
+.table_blur tbody:hover tr:hover td {
+    color: #444444;
+    text-shadow: none;
+}
+
+
+.modalwin1{
+    height: 360px;
+    width: 300px;
+}
+
+.modalwin2{
+    height: 500px;
+    width: 300px;
+}
+
+.modalwin3{
+    height: 200px;
+    width: 300px;
+}
+
+.modalwin4{
+    height: 200px;
+    width: 300px;
+}
+
+.modalwin1,.modalwin2,.modalwin3,.modalwin4 {
+    cursor: url(cursor/NormalSelect.cur), default;
+    border: 3px outset gray;
+    background: burlywood;
+    top: 8%;
+    /* отступ сверху */
+    right: 0;
+    left: 0;
+    font-size: 14px;
+    margin: 0 auto;
+    z-index: 2;
+    /* поверх всех */
+    display: block;
+    /* сначала невидим */
+    position: fixed;
+    /* фиксированное позиционирование, окно стабильно при прокрутке */
+    padding: 15px;
+    border: 1px solid #383838;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #2B1015;
+    transition: all .5s linear;
+}
+
+.hidden {
+    display: none;
+}
+
+.visuallyhidden {
+    opacity: 0;
+}
+
+#p_prldr {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #3068a5;
+    z-index: 30;
+}
+
+.contpre small {
+    font-size: 25px;
+}
+
+.contpre {
+    font-family: Exo2;
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    margin-left: -125px;
+    margin-top: -75px;
+    color: #fff;
+    font-size: 40px;
+    letter-spacing: -2px;
+    text-align: center;
+    line-height: 35px;
+}
+
+#p_prldr .svg_anm {
+    position: absolute;
+    width: 41px;
+    height: 41px;
+    background: url(preloader/tail-spin.svg) center center no-repeat;
+    background-size: 41px;
+    margin: -16px 0 0 -16px;
+}
