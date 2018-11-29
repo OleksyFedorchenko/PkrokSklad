@@ -16,14 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    public JwtAuthenticationFilter(){
-        this.userDetailsService=userDetailsService;
-        this.jwtTokenProvider=jwtTokenProvider;
-    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
