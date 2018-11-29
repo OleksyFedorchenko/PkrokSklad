@@ -168,12 +168,6 @@
         $(document).ready(function() {
 
             if (token) {
-                $.ajaxSetup({
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                })
-
 
                 getFirmsTypes();
                 setTimeout(getParts, 500);
@@ -244,8 +238,8 @@
                     if ($('#imageEdit')[0].files[0]) {
                         setTimeout(uploadFile(partId), 300);
                     }
-                    setTimeout(getParts, 300);
-                    setTimeout(closeEdit, 300);
+                    setTimeout(getParts, 500);
+                    setTimeout(closeEdit, 500);
                 });
 
                 $(document).on('click', '#partsTable tbody button.btn-delete', function(e) {
@@ -269,6 +263,7 @@
 
                 $('#logoutBtn').on('click', function(e) {
                     window.localStorage.removeItem('auth_token');
+                    window.localStorage.removeItem('role');
                     window.location.reload();
                 });
 

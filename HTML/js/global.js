@@ -1,11 +1,12 @@
 let serverURL = 'http://localhost:8080/';
 let token = window.localStorage.getItem('auth_token');
 
+if(token){
 $.ajaxSetup({
     headers : {
         'Authorization' : 'Bearer ' + token
     }
-})
+})}
 
 function parseJwt (token) {
     var base64Url = token.split('.')[1];

@@ -59,13 +59,14 @@
                 complete: function(res) {
                     if (res.status == 200) {
                         let token = res.responseJSON.token;
+                        console.log(token);
                         window.localStorage.setItem('auth_token', token);
                         
                         //console.log(parseJwt(token));
                         let role = parseJwt(token).auth;
                         console.log(role);
                         window.localStorage.setItem('role', role);
-                             window.location.href = 'index.html';
+                        window.location.href = 'index.html';
                     }else{
                          $('#errorMessage').html("Login or password is incorrect");
                         document.getElementById('signinForm').reset();

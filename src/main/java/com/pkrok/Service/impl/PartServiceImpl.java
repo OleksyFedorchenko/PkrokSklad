@@ -75,7 +75,7 @@ public class PartServiceImpl implements PartService {
         part.setImage(partDTO.getImage());
         PartEntity part1 = partRepository.findByName(part.getName());
         if (part1 != null) {
-            if (part1.getName() != part.getName()) {
+            if (!part1.getName().equals(part.getName())) {
                 throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
             }
         }
