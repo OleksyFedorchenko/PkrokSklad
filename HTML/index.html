@@ -149,7 +149,7 @@
 
     <hr />
     <div align="center">
-        <FONT SIZE=2 color="#888888">Copyright @ 2018-2019, Oleksy Fedorchenko / <a style="font-family: Exo2" href="adminpage.html">admin</a> </FONT>
+        <FONT SIZE=2 color="#888888">Copyright @ 2018-2019, Oleksy Fedorchenko / <label id="admin" style="font-family: Exo2">admin</label> </FONT>
         <input class="cancelbutton" id="logoutBtn" type="button" value="Logout">
     </div>
 
@@ -177,9 +177,13 @@
 
                 getFirmsTypes();
                 setTimeout(getParts, 500);
-                
 
 
+                $('#admin').on('click', function(e) {
+                    if(window.localStorage.getItem('role').includes('ROLE_ADMIN')){
+                        window.location.href = 'adminpage.html';
+                    }
+                });
                 $('#firm').on('change', function(e) {
                     getParts();
                 });
@@ -262,7 +266,7 @@
                     console.log(partId);
                     showEdit(partId);
                 });
-                
+
                 $('#logoutBtn').on('click', function(e) {
                     window.localStorage.removeItem('auth_token');
                     window.location.reload();
