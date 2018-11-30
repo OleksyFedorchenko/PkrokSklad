@@ -53,20 +53,26 @@
 
         </div>
     </div>
-    
-    <div class="view2">
-     <table class="table_blur" id="usersTable">
+<br>
+   <br>
+    <div class="view2" align="center">
+       <label style="font-weight: bold">Управління користувачами</label>
+       <br>
+        <table class="table_blur" id="usersTable">
             <thead>
                 <tr>
                     <th>id</th>
                     <th>Користувач</th>
+                    <th>Роль</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
     </div>
-    
+
 
 
     <div style="text-align: center" id="popupWin" class="modalwin3">
@@ -291,7 +297,7 @@
                         $('#errorMessage').html(response.responseJSON.message);
                         $('#errorMessage').show();
                     }
-                    if (response.status==403){
+                    if (response.status == 403) {
                         $('#errorMessage').html("Acces denied");
                         $('#errorMessage').show();
                     }
@@ -315,7 +321,7 @@
                 url: serverURL + urlplus + '/' + positionId,
                 method: 'DELETE',
                 success: function(response) {
-                    if (response.status==403){
+                    if (response.status == 403) {
                         alert("Acces denied")
                     }
                     console.log(response);
@@ -362,11 +368,11 @@
                         $('#errorMessageEdit').html(response.responseJSON.message);
                         $('#errorMessageEdit').show();
                     }
-                    if (response.status==403){
+                    if (response.status == 403) {
                         $('#errorMessageEdit').html("Acces denied");
                         $('#errorMessageEdit').show();
                     }
-                    
+
                 }
             })
         }
@@ -395,9 +401,9 @@
                 }
             });
         }
-        
+
         function getUserTable() {
-         
+
             $.ajax({
                 url: serverURL + 'auth',
                 method: 'GET',
@@ -412,6 +418,13 @@
                             <tr id="rowID-${value.id}">
                             <td>${value.id} </td>
                             <td>${value.username} </td>
+                            <td>${value.roles[0].name} </td>
+                            <td>
+                                    <button id="user-${value.id}" class="btn-edit">Редагувати</button>    
+                            </td>
+                            <td>
+                                    <button id="user-${value.id}" class="btn-delete">Видалити</button>    
+                            </td>
                             
                             </tr>
                             `);
