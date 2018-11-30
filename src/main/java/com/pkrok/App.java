@@ -1,10 +1,13 @@
 package com.pkrok;
 
+import com.pkrok.Domain.FirmDTO;
+import com.pkrok.Entity.FirmEntity;
 import com.pkrok.Entity.RoleEntity;
+import com.pkrok.Entity.TypeEntity;
 import com.pkrok.Entity.UserEntity;
 import com.pkrok.Exceptions.ResourceNotFoundException;
-import com.pkrok.Repository.RoleRepository;
-import com.pkrok.Repository.UserRepository;
+import com.pkrok.Repository.*;
+import com.pkrok.Utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +32,15 @@ public class App implements CommandLineRunner {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private FirmRepository firmRepository;
+
+    @Autowired
+    private TypeRepository typeRepository;
+
+    @Autowired
+    private ObjectMapperUtils modelMapper;
 
     @Override
     public void run(String... args) throws Exception {
@@ -58,6 +70,20 @@ public class App implements CommandLineRunner {
             System.out.println(roles.isEmpty());
 
             userRepository.save(user);
+        }
+
+        if(firmRepository.count()==0){
+            FirmEntity firm=new FirmEntity();
+            firm.setName("Tryumf");
+            modelMapper.map(firm, FirmEntity.class);
+            firmRepository.save(firm);
+        }
+
+        if(typeRepository.count()==0){
+            TypeEntity type=new TypeEntity();
+            type.setName("Cups");
+            modelMapper.map(type, TypeEntity.class);
+            typeRepository.save(type);
         }
     }
 }
