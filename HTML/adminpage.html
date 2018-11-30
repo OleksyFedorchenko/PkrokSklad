@@ -53,6 +53,20 @@
 
         </div>
     </div>
+    
+    <div class="view2">
+     <table class="table_blur" id="usersTable">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Користувач</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    
 
 
     <div style="text-align: center" id="popupWin" class="modalwin3">
@@ -107,6 +121,7 @@
 
 
                 getTable();
+                getUserTable();
 
 
                 $(document).on('change', '#tableselect', function(e) {
@@ -276,6 +291,10 @@
                         $('#errorMessage').html(response.responseJSON.message);
                         $('#errorMessage').show();
                     }
+                    if (response.status==403){
+                        $('#errorMessage').html("Acces denied");
+                        $('#errorMessage').show();
+                    }
 
                 }
             })
@@ -296,6 +315,9 @@
                 url: serverURL + urlplus + '/' + positionId,
                 method: 'DELETE',
                 success: function(response) {
+                    if (response.status==403){
+                        alert("Acces denied")
+                    }
                     console.log(response);
                     $('#firmstypesTable tbody').empty();
                     getTable();
@@ -340,6 +362,11 @@
                         $('#errorMessageEdit').html(response.responseJSON.message);
                         $('#errorMessageEdit').show();
                     }
+                    if (response.status==403){
+                        $('#errorMessageEdit').html("Acces denied");
+                        $('#errorMessageEdit').show();
+                    }
+                    
                 }
             })
         }
@@ -365,6 +392,30 @@
                     console.log(response);
                     document.getElementById('idEdit').value = response.id;
                     document.getElementById('nameEdit').value = response.name;
+                }
+            });
+        }
+        
+        function getUserTable() {
+         
+            $.ajax({
+                url: serverURL + 'auth',
+                method: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                    $('#usersTable tbody').empty();
+                    $.each(response, function(key, value) {
+                        $('#usersTable tbody').append(
+                            `
+                            <tr id="rowID-${value.id}">
+                            <td>${value.id} </td>
+                            <td>${value.username} </td>
+                            
+                            </tr>
+                            `);
+                    })
                 }
             });
         }

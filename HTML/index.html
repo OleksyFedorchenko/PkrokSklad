@@ -264,7 +264,7 @@
                 });
 
                 $(document).on('click', '#partsTable tbody button.btn-delete', function(e) {
-                    var r = confirm("Delete part?");
+                    var r = confirm("Ви дійсно бажаєте видалити запчастину?");
                     if (r == true) {
                         console.log(e.target.id);
                         let elementId = e.target.id;
