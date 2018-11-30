@@ -47,7 +47,7 @@
             </tbody>
         </table>
 
-        <img id="partImg" class="img" src="http://localhost:8080/parts/image?fileName=empty.png" width="60%">
+        <img id="partImg" class="img" src="empty.png" width="60%">
 
         <div class="menu1">
 
@@ -158,7 +158,8 @@
     <script src="js/global.js"></script>
     <script>
         var selectedId;
-        var isSelectedPart;
+        var isSelectedPart=false;
+        var selectedImg;
         var boxAdd = $('#popupWin');
         var boxEdit = $('#popupWin2');
         boxAdd.addClass('visuallyhidden');
@@ -180,21 +181,33 @@
                     }
                 });
                 $('#firm').on('change', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     getParts();
                 });
                 $('#type').on('change', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     getParts();
                 });
                 $('#sortTable').on('change', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     getParts();
                 });
                 $('#search').on('keyup', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     getParts();
                 });
                 $('#Add').on('click', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     showAdd();
                 });
                 $('#okAdd').on('click', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     addPart();
                 });
                 $('#cancelAdd').on('click', function(e) {
@@ -212,6 +225,8 @@
                     setQuantityById(selectedId, plus, minus);
                     document.getElementById('plus').value = "0";
                     document.getElementById('minus').value = "0";
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                 });
 
 
@@ -219,20 +234,23 @@
                     $('tr').removeClass();
                     $(this).addClass('selected');
                     selectedId = $(this).children('td:first-child').text().split(" ")[0];
+                    selectedImg=$(this).children('td:last-child').text();
                     isSelectedPart=true;
                     $('#submitAddMinus').removeAttr('disabled');
 
                 });
 
                 $(document).on('mouseenter', '#partsTable tbody tr', function(e) {
-                    let partId = $(this).children('td:first-child').text();
-                    getImageById(partId);
+                    let partImage = $(this).children('td:last-child').text();
+                    $('#partImg').attr("src",serverURL + "parts/image?fileName="+partImage);
 
                 });
 
                 $(document).on('mouseleave', '#partsTable tbody tr', function(e) {
-                    
-                    $('#partImg').attr("src", "empty.png");
+                    if(isSelectedPart){
+                        $('#partImg').attr("src",serverURL + "parts/image?fileName="+selectedImg);
+                    }else{
+                    $('#partImg').attr("src", "empty.png");}
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
@@ -511,20 +529,6 @@
             });
         }
         
-        function getImageById(partId) {
-            console.log(partId);
-            $.ajax({
-                url: serverURL + 'parts/' + partId,
-                method: 'GET',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function(response) {
-                    console.log(response);
-                    $('#partImg').attr("src",serverURL + "parts/image?fileName="+response.image);
-                    
-                }
-            });
-        }
 
 
         function editPart() {
