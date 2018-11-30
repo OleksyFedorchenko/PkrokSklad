@@ -231,11 +231,8 @@
                 });
 
                 $(document).on('mouseleave', '#partsTable tbody tr', function(e) {
-                    if (isSelectedPart==true){
-                        getImageById(selectedId);
-                    }
-                    else{
-                    $('#partImg').attr("src", "empty.png");}
+                    
+                    $('#partImg').attr("src", "empty.png");
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
@@ -437,6 +434,7 @@
             let place = $('#placeAdd').val();
             let price = $('#priceAdd').val();
             let description = $('#descriptionAdd').val();
+            let image = "null";
             let firm = $('#firm').val();
             let type = $('#type').val();
             let part = {
@@ -445,6 +443,7 @@
                 place: place,
                 price: price,
                 description: description,
+                image: image,
                 firm: {
                     id: firm
                 },
