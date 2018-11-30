@@ -9,8 +9,12 @@ import com.pkrok.Service.PartService;
 import com.pkrok.Utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class PartServiceImpl implements PartService {
@@ -66,21 +70,27 @@ public class PartServiceImpl implements PartService {
     @Override
     public void setPartById(PartsDTO partDTO) {
         PartEntity part = partRepository.findById(partDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
-        part.setName(partDTO.getName());
-        part.setQuantity(partDTO.getQuantity());
-        part.setPlace(partDTO.getPlace());
-        part.setDescription(partDTO.getDescription());
-        part.setFirm(partDTO.getFirm());
-        part.setType(partDTO.getType());
-        part.setImage(partDTO.getImage());
+//        part.setName(partDTO.getName());
+//        part.setQuantity(partDTO.getQuantity());
+//        part.setPlace(partDTO.getPlace());
+//        part.setDescription(partDTO.getDescription());
+//        part.setFirm(partDTO.getFirm());
+//        part.setType(partDTO.getType());
+//        part.setImage(partDTO.getImage());
         PartEntity part1 = partRepository.findByName(part.getName());
         if (part1 != null) {
             if (!part1.getName().equals(part.getName())) {
                 throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
             }
         }
+
+        System.out.println(partDTO);
+        System.out.println(part);
+
         part = modelMapper.map(partDTO, PartEntity.class);
-        partRepository.save(part);
+        System.out.println(part);
+        PartEntity tempPart = partRepository.save(part);
+        System.out.println("bla" + tempPart);
     }
 
     @Override
@@ -109,6 +119,7 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public void addImageToProduct(String image, Long id) {
+        System.out.println("Set image to product + " + id);
         PartEntity partEntity = partRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Product with id [" + id + "] not found")

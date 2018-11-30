@@ -172,7 +172,7 @@
             if (token) {
 
                 getFirmsTypes();
-                setTimeout(getParts, 500);
+                setTimeout(getParts, 1000);
 
 
                 $('#admin').on('click', function(e) {
@@ -257,7 +257,7 @@
                     let partId = $('#idEdit').val();
                     editPart();
                     if ($('#imageEdit')[0].files[0]) {
-                        setTimeout(uploadFile(partId), 300);
+                        setTimeout(uploadFile(partId), 2000);
                     }
                     setTimeout(getParts, 500);
                     setTimeout(closeEdit, 500);

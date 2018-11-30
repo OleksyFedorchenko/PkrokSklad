@@ -56,6 +56,7 @@ public class PartController {
             ErrorDTO errorDTO = new ErrorDTO(errMsg);
             return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
+        System.out.println(part);
         partService.setPartById(part);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
