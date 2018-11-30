@@ -158,6 +158,7 @@
     <script src="js/global.js"></script>
     <script>
         var selectedId;
+        var isSelectedPart;
         var boxAdd = $('#popupWin');
         var boxEdit = $('#popupWin2');
         boxAdd.addClass('visuallyhidden');
@@ -218,20 +219,23 @@
                     $('tr').removeClass();
                     $(this).addClass('selected');
                     selectedId = $(this).children('td:first-child').text().split(" ")[0];
-                    console.log(selectedId);
+                    isSelectedPart=true;
                     $('#submitAddMinus').removeAttr('disabled');
 
                 });
 
                 $(document).on('mouseenter', '#partsTable tbody tr', function(e) {
-                    let partImage = $(this).children('td:last-child').text();
-                    console.log(partImage);
-                    $('#partImg').attr("src", serverURL + "parts/image?fileName=" + partImage);
+                    let partId = $(this).children('td:first-child').text();
+                    getImageById(partId);
 
                 });
 
                 $(document).on('mouseleave', '#partsTable tbody tr', function(e) {
-                    $('#partImg').attr("src", serverURL + "parts/image?fileName=empty.png");
+                    if (isSelectedPart==true){
+                        getImageById(selectedId);
+                    }
+                    else{
+                    $('#partImg').attr("src", "empty.png");}
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
@@ -250,7 +254,6 @@
                         console.log(e.target.id);
                         let elementId = e.target.id;
                         let partId = elementId.split('-')[1];
-                        console.log(partId);
                         deletePart(partId);
                     }
                 });
@@ -259,7 +262,6 @@
                     console.log(e.target.id);
                     let elementId = e.target.id;
                     let partId = elementId.split('-')[1];
-                    console.log(partId);
                     showEdit(partId);
                 });
 
@@ -509,6 +511,21 @@
                 }
             });
         }
+        
+        function getImageById(partId) {
+            console.log(partId);
+            $.ajax({
+                url: serverURL + 'parts/' + partId,
+                method: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                    $('#partImg').attr("src",serverURL + "parts/image?fileName="+response.image);
+                    
+                }
+            });
+        }
 
 
         function editPart() {
@@ -520,6 +537,7 @@
                 place: $('#placeEdit').val(),
                 price: $('#priceEdit').val(),
                 description: $('#descriptionEdit').val(),
+                image:$('#imgEdit').val(),
                 firm: {
                     id: $('#firmEdit').val(),
                 },
