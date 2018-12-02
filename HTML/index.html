@@ -118,26 +118,26 @@
         <form id='pop2'>
             <label id="errorMessageEdit" style="color: red"></label>
 
-            <input name="text" id="idEdit" hidden>
+            <input name="id" id="idEdit" hidden>
             <label style="font-weight: bold">Назва</label>
-            <input name="text" style="text-align: center" type="text" autofocus id="nameEdit">
+            <input name="name" style="text-align: center" type="text" autofocus id="nameEdit">
             <label style="font-weight: bold">Кількість</label>
-            <input name="text" type="number" id="quantityEdit">
+            <input name="quantity" type="number" id="quantityEdit">
             <label style="font-weight: bold">Місце</label>
-            <input name="text" type="text" id="placeEdit">
+            <input name="place" type="text" id="placeEdit">
             <label style="font-weight: bold">Ціна</label>
-            <input name="text" type="number" value="0" min="0" max="100" step="0.001" id="priceEdit">
+            <input name="price" type="number" value="0" min="0" max="100" step="0.001" id="priceEdit">
             <label style="font-weight: bold">Опис</label>
-            <input name="text" type="text" id="descriptionEdit">
+            <input name="description" type="text" id="descriptionEdit">
             <label style="font-weight: bold">Постачальник</label>
-            <select class="sa1" name="sa1" id="firmEdit">
+            <select class="sa1" name="firm.id" id="firmEdit">
             </select>
             <label style="font-weight: bold">Тип запчастини</label>
-            <select class="sa2" name="sa2" id="typeEdit">
+            <select class="sa2" name="type.id" id="typeEdit">
             </select>
-            <input name="text" id="imgEdit" hidden>
+            <input name="image" id="imgEdit" hidden>
             <label style="font-weight: bold">Малюнок</label>
-            <input type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
+            <input type="file" name="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
             <br>
             <br>
             <input class="button" type="button" value="OK" id="okEdit">
@@ -256,7 +256,7 @@
                 $(document).on('click', '#okEdit', function(e) {
                     let partId = $('#idEdit').val();
                     editPart(partId);
-                    
+
                     setTimeout(getParts, 500);
                     setTimeout(closeEdit, 500);
                 });
@@ -529,36 +529,35 @@
         
 
 
-        function editPart(partId) {
+        function editPart() {
+            let formData = new FormData($('pop2'));
 
-            let part = {
-                id: $('#idEdit').val(),
-                name: $('#nameEdit').val(),
-                quantity: $('#quantityEdit').val(),
-                place: $('#placeEdit').val(),
-                price: $('#priceEdit').val(),
-                description: $('#descriptionEdit').val(),
-                image:$('#imgEdit').val(),
-                firm: {
-                    id: $('#firmEdit').val(),
-                },
-                type: {
-                    id: $('#typeEdit').val(),
-                }
-            };
-            console.log(part);
+//            let part = {
+//                id: $('#idEdit').val(),
+//                name: $('#nameEdit').val(),
+//                quantity: $('#quantityEdit').val(),
+//                place: $('#placeEdit').val(),
+//                price: $('#priceEdit').val(),
+//                description: $('#descriptionEdit').val(),
+//                image:$('#imgEdit').val(),
+//                firm: {
+//                    id: $('#firmEdit').val(),
+//                },
+//                type: {
+//                    id: $('#typeEdit').val(),
+//                }
+//            };
+//            console.log(part);
             $.ajax({
                 url: serverURL + 'parts/edit',
                 method: 'POST',
                 dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(part),
+                contentType: false,
+                processData: false,
+                data: formData,
                 complete: function(response) {
                     if (response.status == 200) {
                         $('#errorMessageEdit').hide();
-                        if ($('#imageEdit')[0].files[0]) {
-                        uploadFile(partId);
-                    }
                     }
                     if (response.status == 400) {
                         $('#errorMessageEdit').html(response.responseJSON.message);

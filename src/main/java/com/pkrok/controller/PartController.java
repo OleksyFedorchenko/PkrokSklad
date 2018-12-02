@@ -46,20 +46,6 @@ public class PartController {
         return new ResponseEntity<Void>(HttpStatus.CREATED); //201
     }
 
-    @PostMapping("edit")
-    public ResponseEntity<?> editPart(@Valid @RequestBody PartsDTO part, BindingResult br) {
-        if (br.hasErrors()) {
-            System.out.println("Validation error");
-            String errMsg = br.getFieldErrors().stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .findFirst().get().toString();
-            ErrorDTO errorDTO = new ErrorDTO(errMsg);
-            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
-        }
-        partService.setPartById(part);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
-
     @PostMapping("quantity/{id}/{plus}/{minus}")
     public ResponseEntity<Void> editQuantityById(@PathVariable("id") Long id, @PathVariable("plus") int plus, @PathVariable("minus") int minus) {
         partService.setQuantityById(id, plus, minus);
@@ -116,16 +102,32 @@ public class PartController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping("{productId}/image")
-    public ResponseEntity<?> uploadImage(
-            @PathVariable("productId") Long id,
-            @RequestParam("file") MultipartFile file
-    ) {
-        System.out.println(file.getOriginalFilename());
+    @PostMapping("edit")
+    public ResponseEntity<?> editPart(@Valid @RequestBody PartsDTO part, @RequestParam("file") MultipartFile file, BindingResult br) {
+        if (br.hasErrors()) {
+            System.out.println("Validation error");
+            String errMsg = br.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .findFirst().get().toString();
+            ErrorDTO errorDTO = new ErrorDTO(errMsg);
+            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+        }
+        System.out.println(part);
+        partService.setPartById(part);
         fileStorageService.storeFile(file);
-        partService.addImageToProduct(file.getOriginalFilename(), id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        partService.addImageToProduct(file.getOriginalFilename(), part.getId());
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
+//    @PostMapping("{productId}/image")
+//    public ResponseEntity<?> uploadImage(
+//            @PathVariable("productId") Long id,
+//            @RequestParam("file") MultipartFile file
+//    ) {
+//        System.out.println(file.getOriginalFilename());
+//        fileStorageService.storeFile(file);
+//        partService.addImageToProduct(file.getOriginalFilename(), id);
+//        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+//    }
 
     @GetMapping("image")
     public ResponseEntity<?> getFile(
