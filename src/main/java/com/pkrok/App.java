@@ -62,12 +62,9 @@ public class App implements CommandLineRunner {
 
             RoleEntity role = roleRepository.findByName("ADMIN")
                     .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
-            System.out.println(role.getName());
             Set<RoleEntity> roles = new HashSet<>();
             roles.add(role);
             user.setRoles(roles);
-            System.out.println(roles.isEmpty());
-
             userRepository.save(user);
         }
 
