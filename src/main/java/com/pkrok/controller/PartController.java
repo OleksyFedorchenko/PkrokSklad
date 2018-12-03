@@ -4,6 +4,7 @@ import com.pkrok.domain.ErrorDTO;
 import com.pkrok.domain.PartsDTO;
 import com.pkrok.service.FileStorageService;
 import com.pkrok.service.PartService;
+import com.pkrok.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.io.Resource;

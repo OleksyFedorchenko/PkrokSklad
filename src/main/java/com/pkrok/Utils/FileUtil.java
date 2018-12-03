@@ -1,4 +1,4 @@
-package com.pkrok.Utils;
+package com.pkrok.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 
