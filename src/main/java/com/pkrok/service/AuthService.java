@@ -12,4 +12,8 @@ public interface AuthService {
     String signin(SigninRequest request);
 
     List<UserEntity> findAllUsersOrderById();
+
+    void deleteUserById(Long id);
+
+    void setUserById(UserEntity userEntity);
 }

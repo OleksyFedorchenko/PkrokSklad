@@ -38,4 +38,10 @@ public class AuthController {
     public ResponseEntity<List<UserEntity>> getAllUsersById() {
         return ResponseEntity.ok(authService.findAllUsersOrderById());
     }
+
+    @DeleteMapping("{userId}")
+    public ResponseEntity<?> deleteUserById(@PathVariable("userId") Long id) {
+        authService.deleteUserById(id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }

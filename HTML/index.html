@@ -98,7 +98,7 @@
             <label style="font-weight: bold">Назва</label>
             <input name="text" style="text-align: center" type="text" autofocus id="nameAdd">
             <label style="font-weight: bold">Кількість</label>
-            <input name="text" type="number" id="quantityAdd">
+            <input name="text" type="number" value="0" id="quantityAdd">
             <label style="font-weight: bold">Місце</label>
             <input name="text" type="text" id="placeAdd">
             <label style="font-weight: bold">Ціна</label>
@@ -172,7 +172,7 @@
             if (token) {
 
                 getFirmsTypes();
-                setTimeout(getParts, 500);
+                setTimeout(getParts, 1000);
 
 
                 $('#admin').on('click', function(e) {
@@ -255,10 +255,8 @@
 
                 $(document).on('click', '#okEdit', function(e) {
                     let partId = $('#idEdit').val();
-                    editPart();
-                    if ($('#imageEdit')[0].files[0]) {
-                        setTimeout(uploadFile(partId), 300);
-                    }
+                    editPart(partId);
+                    
                     setTimeout(getParts, 500);
                     setTimeout(closeEdit, 500);
                 });
@@ -531,7 +529,7 @@
         
 
 
-        function editPart() {
+        function editPart(partId) {
 
             let part = {
                 id: $('#idEdit').val(),
@@ -558,6 +556,9 @@
                 complete: function(response) {
                     if (response.status == 200) {
                         $('#errorMessageEdit').hide();
+                        if ($('#imageEdit')[0].files[0]) {
+                        uploadFile(partId);
+                    }
                     }
                     if (response.status == 400) {
                         $('#errorMessageEdit').html(response.responseJSON.message);

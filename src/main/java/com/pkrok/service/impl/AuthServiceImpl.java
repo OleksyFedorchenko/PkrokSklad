@@ -77,4 +77,17 @@ public class AuthServiceImpl implements AuthService {
     public List<UserEntity> findAllUsersOrderById() {
         return userRepository.findAllByOrderById();
     }
+
+    @Override
+    public void setUserById(UserEntity userEntity) {
+        UserEntity newUser=userRepository.findById(userEntity.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
+        newUser.setUsername(userEntity.getUsername());
+        newUser.setRoles(userEntity.getRoles());
+        userRepository.save(newUser);
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 }

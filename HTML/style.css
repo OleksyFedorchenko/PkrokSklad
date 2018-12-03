@@ -65,7 +65,8 @@ select {
 }
 
 .cancelbutton,
-.btn-delete {
+.btn-delete,
+.btn-delete-user{
     cursor: url(cursor/LinkSelect.cur), pointer;
     background-color: darkred;
 }

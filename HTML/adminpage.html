@@ -160,7 +160,7 @@
             });
 
             $(document).on('click', '#firmstypesTable tbody button.btn-delete', function (e) {
-                var r = confirm("Delete part?");
+                var r = confirm("Ви дійсно бажаєте видалити позицію?");
                 if (r == true) {
                     console.log(e.target.id);
                     let elementId = e.target.id;
@@ -169,6 +169,16 @@
                     deletePosition(positionId);
                 }
             });
+            
+            $(document).on('click', '#usersTable tbody button.btn-delete-user', function(e) {
+                    var r = confirm("Ви дійсно бажаєте видалити користувача?");
+                    if (r == true) {
+                        console.log(e.target.id);
+                        let elementId = e.target.id;
+                        let userId = elementId.split('-')[1];
+                        deleteUser(userId);
+                    }
+                });
 
             $('#logoutBtn').on('click', function (e) {
                 window.localStorage.removeItem('auth_token');
@@ -335,6 +345,21 @@
             }
         });
     }
+    
+     function deleteUser(userId) {
+        $.ajax({
+            url: serverURL + 'auth/' + userId,
+            method: 'DELETE',
+            success: function (response) {
+                if (response.status == 403) {
+                    alert("Acces denied")
+                }
+                console.log(response);
+                $('#usersTable tbody').empty();
+                getUserTable();
+            }
+        });
+    }
 
     function editPosition() {
         let table = $('#tableselect').val();
@@ -428,7 +453,7 @@
                                     <button id="user-${value.id}" class="btn-edit">Редагувати</button>    
                             </td>
                             <td>
-                                    <button id="user-${value.id}" class="btn-delete">Видалити</button>    
+                                    <button id="user-${value.id}" class="btn-delete-user">Видалити</button>    
                             </td>
                             
                             </tr>
