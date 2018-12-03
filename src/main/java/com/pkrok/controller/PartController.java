@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -103,31 +102,23 @@ public class PartController {
     }
 
     @PostMapping("edit")
-    public ResponseEntity<?> editPart(@Valid @RequestBody PartsDTO part, @RequestParam("file") MultipartFile file, BindingResult br) {
+    public ResponseEntity<?> editPart(@Valid @ModelAttribute PartsDTO part, BindingResult br) {
         if (br.hasErrors()) {
             System.out.println("Validation error");
             String errMsg = br.getFieldErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .findFirst().get().toString();
+                    .findFirst().get();
             ErrorDTO errorDTO = new ErrorDTO(errMsg);
             return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
         System.out.println(part);
         partService.setPartById(part);
-        fileStorageService.storeFile(file);
-        partService.addImageToProduct(file.getOriginalFilename(), part.getId());
+        if (FileUtil.isValid(part.getFile())) {
+            fileStorageService.storeFile(part.getFile());
+            partService.addImageToProduct(part.getFile().getOriginalFilename(), part.getId());
+        }
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
-//    @PostMapping("{productId}/image")
-//    public ResponseEntity<?> uploadImage(
-//            @PathVariable("productId") Long id,
-//            @RequestParam("file") MultipartFile file
-//    ) {
-//        System.out.println(file.getOriginalFilename());
-//        fileStorageService.storeFile(file);
-//        partService.addImageToProduct(file.getOriginalFilename(), id);
-//        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-//    }
 
     @GetMapping("image")
     public ResponseEntity<?> getFile(

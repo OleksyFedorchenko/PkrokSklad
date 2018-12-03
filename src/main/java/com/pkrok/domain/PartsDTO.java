@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -43,4 +44,6 @@ public class PartsDTO {
 
     @NotNull(message = "Field 'FIRM' can't be null")
     private FirmEntity firm;
+
+    private MultipartFile file;
 }

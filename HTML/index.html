@@ -137,7 +137,7 @@
             </select>
             <input name="image" id="imgEdit" hidden>
             <label style="font-weight: bold">Малюнок</label>
-            <input type="file" name="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
+            <input name="file" type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
             <br>
             <br>
             <input class="button" type="button" value="OK" id="okEdit">
@@ -256,7 +256,6 @@
                 $(document).on('click', '#okEdit', function(e) {
                     let partId = $('#idEdit').val();
                     editPart(partId);
-
                     setTimeout(getParts, 500);
                     setTimeout(closeEdit, 500);
                 });
@@ -526,35 +525,15 @@
                 }
             });
         }
-        
-
 
         function editPart() {
-            let formData = new FormData($('pop2'));
-
-//            let part = {
-//                id: $('#idEdit').val(),
-//                name: $('#nameEdit').val(),
-//                quantity: $('#quantityEdit').val(),
-//                place: $('#placeEdit').val(),
-//                price: $('#priceEdit').val(),
-//                description: $('#descriptionEdit').val(),
-//                image:$('#imgEdit').val(),
-//                firm: {
-//                    id: $('#firmEdit').val(),
-//                },
-//                type: {
-//                    id: $('#typeEdit').val(),
-//                }
-//            };
-//            console.log(part);
             $.ajax({
                 url: serverURL + 'parts/edit',
-                method: 'POST',
+                type: 'POST',
                 dataType: 'json',
                 contentType: false,
                 processData: false,
-                data: formData,
+                data: new FormData($('#pop2')[0]),
                 complete: function(response) {
                     if (response.status == 200) {
                         $('#errorMessageEdit').hide();
@@ -570,7 +549,6 @@
                 }
             })
         }
-
 
         function uploadFile(partId) {
             let formData = new FormData();
