@@ -12,71 +12,72 @@
             src: url(Exo2.otf);
             /* Путь к файлу со шрифтом */
         }
+
         .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 
 <body>
-    <img src="login.png" class="center">
-    <form align='center' id='signupForm'>
+<img src="login.png" class="center">
+<form align='center' id='signupForm'>
 
-        <label id="errorMessage" style="color: red"></label>
-        <label style="font-weight: bolder">Реєстрація нового користувача</label>
-        <br>
-        <label style="font-weight: bold">Введіть логін</label>
-        <input name="user" style="text-align: center" type="text" autofocus id="username">
-        <label style="font-weight: bold">Введіть пароль</label>
-        <input name="pass" style="text-align: center" type="password" autofocus id="password">
-        <br>
-        <br>
-        <input class="button" type="Submit" value="Реєструвати">
-    </form>
-    <div align="center">
-        <FONT SIZE=2 color="#888888"><a href="login.html" style="font-family: Exo2">Вхід</a></FONT>
-    </div>
+    <label id="errorMessage" style="color: red"></label>
+    <label style="font-weight: bolder">Реєстрація нового користувача</label>
+    <br>
+    <label style="font-weight: bold">Введіть логін</label>
+    <input name="user" style="text-align: center" type="text" autofocus id="username">
+    <label style="font-weight: bold">Введіть пароль</label>
+    <input name="pass" style="text-align: center" type="password" autofocus id="password">
+    <br>
+    <br>
+    <input class="button" type="Submit" value="Реєструвати">
+</form>
+<div align="center">
+    <FONT SIZE=2 color="#888888"><a href="login.html" style="font-family: Exo2">Вхід</a></FONT>
+</div>
 
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/global.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#signupForm').submit(function(e) {
-                e.preventDefault();
-                signup();
-            });
+<script src="js/jquery.min.js"></script>
+<script src="js/global.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#signupForm').submit(function (e) {
+            e.preventDefault();
+            signup();
         });
+    });
 
-        function signup() {
-            let user = {
-                username: $('#username').val(),
-                password: $('#password').val()
-            };
-            $.ajax({
-                url: serverURL + 'auth/signup',
-                method: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(user),
-                complete: function(response) {
-                    if (response.status == 201) {
-                        document.getElementById('signupForm').reset();
-                        $('#errorMessage').html("Register OK");
-                        window.location.href = 'login.html';
+    function signup() {
+        let user = {
+            username: $('#username').val(),
+            password: $('#password').val()
+        };
+        $.ajax({
+            url: serverURL + 'auth/signup',
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(user),
+            complete: function (response) {
+                if (response.status == 201) {
+                    document.getElementById('signupForm').reset();
+                    $('#errorMessage').html("Register OK");
+                    window.location.href = 'login.html';
 
-                    } else {
-                        $('#errorMessage').html("User already exists");
-                        document.getElementById('signupForm').reset();
-                        $('#username').focus();
-                    }
+                } else {
+                    $('#errorMessage').html("User already exists");
+                    document.getElementById('signupForm').reset();
+                    $('#username').focus();
                 }
-            })
-        }
+            }
+        })
+    }
 
-    </script>
+</script>
 </body>
 
 </html>
