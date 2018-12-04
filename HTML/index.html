@@ -243,7 +243,6 @@
                 $(document).on('mouseenter', '#partsTable tbody tr', function(e) {
                     let partImage = $(this).children('td:last-child').text();
                     $('#partImg').attr("src",serverURL + "parts/image?fileName="+partImage);
-
                 });
 
                 $(document).on('mouseleave', '#partsTable tbody tr', function(e) {
@@ -527,6 +526,17 @@
             });
         }
         
+        function getElementFromTable(id,name,quantity,place,description,price,image,firm,type){
+                    document.getElementById('idEdit').value = response.id;
+                    document.getElementById('nameEdit').value = response.name;
+                    document.getElementById('quantityEdit').value = response.quantity;
+                    document.getElementById('placeEdit').value = response.place;
+                    document.getElementById('descriptionEdit').value = response.description;
+                    document.getElementById('priceEdit').value = response.price;
+                    document.getElementById('imgEdit').value = response.image;
+                    document.getElementById('firmEdit').value = response.firm.id;
+                    document.getElementById('typeEdit').value = response.type.id;
+        }
 
 
         function editPart(partId) {
