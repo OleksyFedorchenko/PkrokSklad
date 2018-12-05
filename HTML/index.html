@@ -172,7 +172,7 @@
             if (token) {
 
                 getFirmsTypes();
-                setTimeout(getParts, 1000);
+                setTimeout(getParts, 1200);
 
 
                 $('#admin').on('click', function(e) {
@@ -527,15 +527,15 @@
         }
         
         function getElementFromTable(id,name,quantity,place,description,price,image,firm,type){
-                    document.getElementById('idEdit').value = response.id;
-                    document.getElementById('nameEdit').value = response.name;
-                    document.getElementById('quantityEdit').value = response.quantity;
-                    document.getElementById('placeEdit').value = response.place;
-                    document.getElementById('descriptionEdit').value = response.description;
-                    document.getElementById('priceEdit').value = response.price;
-                    document.getElementById('imgEdit').value = response.image;
-                    document.getElementById('firmEdit').value = response.firm.id;
-                    document.getElementById('typeEdit').value = response.type.id;
+                    document.getElementById('idEdit').value = id;
+                    document.getElementById('nameEdit').value = name;
+                    document.getElementById('quantityEdit').value = quantity;
+                    document.getElementById('placeEdit').value = place;
+                    document.getElementById('descriptionEdit').value = description;
+                    document.getElementById('priceEdit').value = price;
+                    document.getElementById('imgEdit').value = image;
+                    document.getElementById('firmEdit').value = firm;
+                    document.getElementById('typeEdit').value = type;
         }
 
 
