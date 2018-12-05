@@ -114,7 +114,7 @@ public class PartController {
         }
         System.out.println(part);
         partService.setPartById(part);
-        if (FileUtil.isValid(part.getFile())) {
+        if (FileUtil.isNotEmpty(part.getFile())) {
             fileStorageService.storeFile(part.getFile());
             partService.addImageToProduct(part.getFile().getOriginalFilename(), part.getId());
         }
