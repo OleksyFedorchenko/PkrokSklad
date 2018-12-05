@@ -31,12 +31,12 @@ public class AuthServiceImpl implements AuthService {
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider){
-        this.userRepository=userRepository;
-        this.roleRepository=roleRepository;
-        this.passwordEncoder=passwordEncoder;
-        this.authenticationManager=authenticationManager;
-        this.jwtTokenProvider=jwtTokenProvider;
+    public AuthServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void setUserById(UserEntity userEntity) {
-        UserEntity newUser=userRepository.findById(userEntity.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
+        UserEntity newUser = userRepository.findById(userEntity.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
         newUser.setUsername(userEntity.getUsername());
         newUser.setRoles(userEntity.getRoles());
         userRepository.save(newUser);
