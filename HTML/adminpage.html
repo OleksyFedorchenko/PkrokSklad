@@ -12,239 +12,254 @@
             src: url(Exo2.otf);
             /* Путь к файлу со шрифтом */
         }
-        .selected{ font-weight:bold;
-                   color: RED;}
+
+        .selected {
+            font-weight: bold;
+            color: RED;
+        }
     </style>
 </head>
 
 <body>
-    <div id="p_prldr">
-        <div class="contpre"><span class="svg_anm"></span>
-            <br>Зачекайте
-            <br><small>сторінка завантажується</small></div>
+<div id="p_prldr">
+    <div class="contpre"><span class="svg_anm"></span>
+        <br>Зачекайте
+        <br>
+        <small>сторінка завантажується</small>
     </div>
+</div>
 
-    <img src="background1.jpg" width="100%" height="169px">
+<img src="background1.jpg" width="100%" height="169px">
 
-    <div class="view">
-        <table class="table_blur" id="firmstypesTable">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Назва</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <div class="menu1">
+<div class="view">
+    <table class="table_blur" id="firmstypesTable">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Назва</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div class="menu1">
 
-            <label style="font-weight: bold">Виберіть таблицю</label>
-            <select class="s1" name="s1" id="tableselect">
-                <option value="1">Постачальники</option>
-                <option value="2">Типи запчастин</option>
-            </select>
+        <label style="font-weight: bold">Виберіть таблицю</label>
+        <select class="s1" name="s1" id="tableselect">
+            <option value="1">Постачальники</option>
+            <option value="2">Типи запчастин</option>
+        </select>
 
-            <label style="font-weight: bold">Додати</label>
-            <input class="button" id="addPosition" type="button" value="Додати позицію">
+        <label style="font-weight: bold">Додати</label>
+        <input class="button" id="addPosition" type="button" value="Додати позицію">
 
 
-        </div>
     </div>
+</div>
 <br>
-   <br>
-    <div class="view2" align="center">
-       <label style="font-weight: bold">Управління користувачами</label>
-       <br>
-        <table class="table_blur" id="usersTable">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Користувач</th>
-                    <th>Роль</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+<br>
+<div class="view2" align="center">
+    <label style="font-weight: bold">Управління користувачами</label>
+    <br>
+    <table class="table_blur" id="usersTable">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Користувач</th>
+            <th>Роль</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
 
+<div style="text-align: center" id="popupWin" class="modalwin3">
+    <label style="font-size: 18pt"> Додати позицію: </label>
+    <br>
+    <form id='pop'>
 
-    <div style="text-align: center" id="popupWin" class="modalwin3">
-        <label style="font-size: 18pt"> Додати позицію: </label>
+        <label id="errorMessage" style="color: red"></label>
+        <label style="font-weight: bold">Назва</label>
+        <input name="text" style="text-align: center" type="text" autofocus id="nameAdd">
         <br>
-        <form id='pop'>
-
-            <label id="errorMessage" style="color: red"></label>
-            <label style="font-weight: bold">Назва</label>
-            <input name="text" style="text-align: center" type="text" autofocus id="nameAdd">
-            <br>
-            <br>
-            <input class="button" id="okAdd" type="button" value="OK">
-            <input class="cancelbutton" id="cancelAdd" type="button" value="Cancel">
-        </form>
-    </div>
-
-    <div style="text-align: center" id="popupWin2" class="modalwin4">
-        <label style="font-size: 18pt"> Редагувати позицію: </label>
         <br>
-        <form id='pop2'>
-            <label id="errorMessageEdit" style="color: red"></label>
-            <input name="text" id="idEdit" hidden>
-            <label style="font-weight: bold">Назва</label>
-            <input name="text" style="text-align: center" type="text" autofocus id="nameEdit">
-            <br>
-            <br>
-            <input class="button" type="button" value="OK" id="okEdit">
-            <input class="cancelbutton" id="cancelEdit" type="button" value="Cancel">
-        </form>
-    </div>
+        <input class="button" id="okAdd" type="button" value="OK">
+        <input class="cancelbutton" id="cancelAdd" type="button" value="Cancel">
+    </form>
+</div>
+
+<div style="text-align: center" id="popupWin2" class="modalwin4">
+    <label style="font-size: 18pt"> Редагувати позицію: </label>
+    <br>
+    <form id='pop2'>
+        <label id="errorMessageEdit" style="color: red"></label>
+        <input name="text" id="idEdit" hidden>
+        <label style="font-weight: bold">Назва</label>
+        <input name="text" style="text-align: center" type="text" autofocus id="nameEdit">
+        <br>
+        <br>
+        <input class="button" type="button" value="OK" id="okEdit">
+        <input class="cancelbutton" id="cancelEdit" type="button" value="Cancel">
+    </form>
+</div>
 
 
-    <hr />
-    <div align="center">
-        <FONT SIZE=2 color="#888888">Copyright @ 2018-2019, Oleksy Fedorchenko <a href="index.html" style="font-family: Exo2">user</a></FONT>
-        <input class="cancelbutton" id="logoutBtn" type="button" value="Logout">
-    </div>
+<hr/>
+<div align="center">
+    <FONT SIZE=2 color="#888888">Copyright @ 2018-2019, Oleksy Fedorchenko <a href="index.html"
+                                                                              style="font-family: Exo2">user</a></FONT>
+    <input class="cancelbutton" id="logoutBtn" type="button" value="Logout">
+</div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/global.js"></script>
-    <script>
-        var boxAdd = $('#popupWin');
-        var boxEdit = $('#popupWin2');
-        boxAdd.addClass('visuallyhidden');
-        boxAdd.addClass('hidden');
-        boxEdit.addClass('visuallyhidden');
-        boxEdit.addClass('hidden');
-        $(document).ready(function() {
+<script src="js/jquery.min.js"></script>
+<script src="js/global.js"></script>
+<script>
+    var boxAdd = $('#popupWin');
+    var boxEdit = $('#popupWin2');
+    boxAdd.addClass('visuallyhidden');
+    boxAdd.addClass('hidden');
+    boxEdit.addClass('visuallyhidden');
+    boxEdit.addClass('hidden');
+    $(document).ready(function () {
 
-            if (token) {
+        if (token) {
 
 
+            getTable();
+            getUserTable();
+
+
+            $(document).on('change', '#tableselect', function (e) {
                 getTable();
-                getUserTable();
+            });
 
+            $(document).on('click', '#addPosition', function (e) {
+                showAdd();
+            });
 
-                $(document).on('change', '#tableselect', function(e) {
-                    getTable();
-                });
+            $(document).on('click', '#cancelAdd', function (e) {
+                closeAdd();
+            });
 
-                $(document).on('click', '#addPosition', function(e) {
-                    showAdd();
-                });
+            $(document).on('click', '#okAdd', function (e) {
+                addPosition();
+            });
 
-                $(document).on('click', '#cancelAdd', function(e) {
-                    closeAdd();
-                });
+            $(document).on('click', '#okEdit', function (e) {
+                editPosition();
+            });
 
-                $(document).on('click', '#okAdd', function(e) {
-                    addPosition();
-                });
+            $(document).on('click', '#cancelEdit', function (e) {
+                closeEdit();
+            });
 
-                $(document).on('click', '#okEdit', function(e) {
-                    editPosition();
-                });
-
-                $(document).on('click', '#cancelEdit', function(e) {
-                    closeEdit();
-                });
-
-                $(document).on('click', '#firmstypesTable tbody button.btn-delete', function(e) {
-                    var r = confirm("Delete part?");
-                    if (r == true) {
-                        console.log(e.target.id);
-                        let elementId = e.target.id;
-                        let positionId = elementId.split('-')[1];
-                        console.log(positionId);
-                        deletePosition(positionId);
-                    }
-                });
-
-                $('#logoutBtn').on('click', function(e) {
-                    window.localStorage.removeItem('auth_token');
-                    window.localStorage.removeItem('role');
-                    window.location.reload();
-                });
-
-                $(document).on('click', '#firmstypesTable tbody button.btn-edit', function(e) {
+            $(document).on('click', '#firmstypesTable tbody button.btn-delete', function (e) {
+                var r = confirm("Ви дійсно бажаєте видалити позицію?");
+                if (r == true) {
                     console.log(e.target.id);
                     let elementId = e.target.id;
                     let positionId = elementId.split('-')[1];
                     console.log(positionId);
-                    showEdit(positionId);
+                    deletePosition(positionId);
+                }
+            });
+            
+            $(document).on('click', '#usersTable tbody button.btn-delete-user', function(e) {
+                    var r = confirm("Ви дійсно бажаєте видалити користувача?");
+                    if (r == true) {
+                        console.log(e.target.id);
+                        let elementId = e.target.id;
+                        let userId = elementId.split('-')[1];
+                        deleteUser(userId);
+                    }
                 });
-            } else {
-                $('#logoutBtn').hide();
-                window.location.href = 'login.html';
-            }
 
+            $('#logoutBtn').on('click', function (e) {
+                window.localStorage.removeItem('auth_token');
+                window.localStorage.removeItem('role');
+                window.location.reload();
+            });
+
+            $(document).on('click', '#firmstypesTable tbody button.btn-edit', function (e) {
+                console.log(e.target.id);
+                let elementId = e.target.id;
+                let positionId = elementId.split('-')[1];
+                console.log(positionId);
+                showEdit(positionId);
+            });
+        } else {
+            $('#logoutBtn').hide();
+            window.location.href = 'login.html';
+        }
+
+    });
+
+
+    function showAdd() {
+        if (boxAdd.hasClass('hidden')) {
+            boxAdd.removeClass('hidden');
+            setTimeout(function () {
+                boxAdd.removeClass('visuallyhidden');
+            }, 20);
+        }
+        $('#errorMessage').hide();
+    }
+
+    function closeAdd() {
+        boxAdd.addClass('visuallyhidden');
+        boxAdd.one('transitionend', function (e) {
+            boxAdd.addClass('hidden');
         });
+        document.getElementById('pop').reset();
+    }
 
-
-        function showAdd() {
-            if (boxAdd.hasClass('hidden')) {
-                boxAdd.removeClass('hidden');
-                setTimeout(function() {
-                    boxAdd.removeClass('visuallyhidden');
-                }, 20);
-            }
-            $('#errorMessage').hide();
+    function showEdit(positionId) {
+        if (boxEdit.hasClass('hidden')) {
+            boxEdit.removeClass('hidden');
+            setTimeout(function () {
+                boxEdit.removeClass('visuallyhidden');
+            }, 20);
         }
+        $('#errorMessageEdit').hide();
+        getPositionById(positionId);
+    }
 
-        function closeAdd() {
-            boxAdd.addClass('visuallyhidden');
-            boxAdd.one('transitionend', function(e) {
-                boxAdd.addClass('hidden');
-            });
-            document.getElementById('pop').reset();
+    function closeEdit() {
+        boxEdit.addClass('visuallyhidden');
+        boxEdit.one('transitionend', function (e) {
+            boxEdit.addClass('hidden');
+        });
+        document.getElementById('pop2').reset();
+    }
+
+    function getTable() {
+        let table = $('#tableselect').val();
+        let urlplus;
+        switch (table) {
+            case '1': // if (x === 'value1')
+                urlplus = "firms";
+                break;
+            case '2': // if (x === 'value2')
+                urlplus = "types";
+                break;
         }
-
-        function showEdit(positionId) {
-            if (boxEdit.hasClass('hidden')) {
-                boxEdit.removeClass('hidden');
-                setTimeout(function() {
-                    boxEdit.removeClass('visuallyhidden');
-                }, 20);
-            }
-            $('#errorMessageEdit').hide();
-            getPositionById(positionId);
-        }
-
-        function closeEdit() {
-            boxEdit.addClass('visuallyhidden');
-            boxEdit.one('transitionend', function(e) {
-                boxEdit.addClass('hidden');
-            });
-            document.getElementById('pop2').reset();
-        }
-
-        function getTable() {
-            let table = $('#tableselect').val();
-            let urlplus;
-            switch (table) {
-                case '1': // if (x === 'value1')
-                    urlplus = "firms";
-                    break;
-                case '2': // if (x === 'value2')
-                    urlplus = "types";
-                    break;
-            }
-            $.ajax({
-                url: serverURL + urlplus,
-                method: 'GET',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function(response) {
-                    console.log(response);
-                    $('#firmstypesTable tbody').empty();
-                    $.each(response, function(key, value) {
-                        $('#firmstypesTable tbody').append(
-                            `
+        $.ajax({
+            url: serverURL + urlplus,
+            method: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                $('#firmstypesTable tbody').empty();
+                $.each(response, function (key, value) {
+                    $('#firmstypesTable tbody').append(
+                        `
                             <tr id="rowID-${value.id}">
                             <td>${value.id} </td>
                             <td>${value.name} </td>
@@ -256,165 +271,180 @@
                             </td>
                             </tr>
                             `);
-                    })
-                }
-            });
-        }
-
-        function addPosition() {
-            let table = $('#tableselect').val();
-            let urlplus;
-            switch (table) {
-                case '1': // if (x === 'value1')
-                    urlplus = "firms";
-                    break;
-                case '2': // if (x === 'value2')
-                    urlplus = "types";
-                    break;
+                })
             }
-            let name = $('#nameAdd').val();
-            let position = {
-                name: name,
-            };
-            $.ajax({
-                url: serverURL + urlplus,
-                method: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(position),
-                complete: function(response) {
-                    if (response.status == 201) {
-                        $('#partsTable tbody').empty();
-                        $('#errorMessage').hide();
-                        getTable();
-                        closeAdd();
-                    }
-                    if (response.status == 409) {
-                        $('#errorMessage').html(response.responseJSON.message);
-                        $('#errorMessage').show();
-                    }
-                    if (response.status == 400) {
-                        $('#errorMessage').html(response.responseJSON.message);
-                        $('#errorMessage').show();
-                    }
-                    if (response.status == 403) {
-                        $('#errorMessage').html("Acces denied");
-                        $('#errorMessage').show();
-                    }
+        });
+    }
 
-                }
-            })
+    function addPosition() {
+        let table = $('#tableselect').val();
+        let urlplus;
+        switch (table) {
+            case '1': // if (x === 'value1')
+                urlplus = "firms";
+                break;
+            case '2': // if (x === 'value2')
+                urlplus = "types";
+                break;
         }
+        let name = $('#nameAdd').val();
+        let position = {
+            name: name,
+        };
+        $.ajax({
+            url: serverURL + urlplus,
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(position),
+            complete: function (response) {
+                if (response.status == 201) {
+                    $('#partsTable tbody').empty();
+                    $('#errorMessage').hide();
+                    getTable();
+                    closeAdd();
+                }
+                if (response.status == 409) {
+                    $('#errorMessage').html(response.responseJSON.message);
+                    $('#errorMessage').show();
+                }
+                if (response.status == 400) {
+                    $('#errorMessage').html(response.responseJSON.message);
+                    $('#errorMessage').show();
+                }
+                if (response.status == 403) {
+                    $('#errorMessage').html("Acces denied");
+                    $('#errorMessage').show();
+                }
 
-        function deletePosition(positionId) {
-            let table = $('#tableselect').val();
-            let urlplus;
-            switch (table) {
-                case '1': // if (x === 'value1')
-                    urlplus = "firms";
-                    break;
-                case '2': // if (x === 'value2')
-                    urlplus = "types";
-                    break;
             }
-            $.ajax({
-                url: serverURL + urlplus + '/' + positionId,
-                method: 'DELETE',
-                success: function(response) {
-                    if (response.status == 403) {
-                        alert("Acces denied")
-                    }
-                    console.log(response);
+        })
+    }
+
+    function deletePosition(positionId) {
+        let table = $('#tableselect').val();
+        let urlplus;
+        switch (table) {
+            case '1': // if (x === 'value1')
+                urlplus = "firms";
+                break;
+            case '2': // if (x === 'value2')
+                urlplus = "types";
+                break;
+        }
+        $.ajax({
+            url: serverURL + urlplus + '/' + positionId,
+            method: 'DELETE',
+            success: function (response) {
+                if (response.status == 403) {
+                    alert("Acces denied")
+                }
+                console.log(response);
+                $('#firmstypesTable tbody').empty();
+                getTable();
+            }
+        });
+    }
+    
+     function deleteUser(userId) {
+        $.ajax({
+            url: serverURL + 'auth/' + userId,
+            method: 'DELETE',
+            success: function (response) {
+                if (response.status == 403) {
+                    alert("Acces denied")
+                }
+                console.log(response);
+                $('#usersTable tbody').empty();
+                getUserTable();
+            }
+        });
+    }
+
+    function editPosition() {
+        let table = $('#tableselect').val();
+        let urlplus;
+        switch (table) {
+            case '1': // if (x === 'value1')
+                urlplus = "firms";
+                break;
+            case '2': // if (x === 'value2')
+                urlplus = "types";
+                break;
+        }
+        let position = {
+            id: $('#idEdit').val(),
+            name: $('#nameEdit').val(),
+        };
+        console.log(position);
+        $.ajax({
+            url: serverURL + urlplus + '/edit',
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(position),
+            complete: function (response) {
+                if (response.status == 200) {
+                    $('#errorMessageEdit').hide();
                     $('#firmstypesTable tbody').empty();
                     getTable();
+                    closeEdit();
                 }
-            });
-        }
+                if (response.status == 400) {
+                    $('#errorMessageEdit').html(response.responseJSON.message);
+                    $('#errorMessageEdit').show();
+                }
+                if (response.status == 409) {
+                    $('#errorMessageEdit').html(response.responseJSON.message);
+                    $('#errorMessageEdit').show();
+                }
+                if (response.status == 403) {
+                    $('#errorMessageEdit').html("Acces denied");
+                    $('#errorMessageEdit').show();
+                }
 
-        function editPosition() {
-            let table = $('#tableselect').val();
-            let urlplus;
-            switch (table) {
-                case '1': // if (x === 'value1')
-                    urlplus = "firms";
-                    break;
-                case '2': // if (x === 'value2')
-                    urlplus = "types";
-                    break;
             }
-            let position = {
-                id: $('#idEdit').val(),
-                name: $('#nameEdit').val(),
-            };
-            console.log(position);
-            $.ajax({
-                url: serverURL + urlplus + '/edit',
-                method: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(position),
-                complete: function(response) {
-                    if (response.status == 200) {
-                        $('#errorMessageEdit').hide();
-                        $('#firmstypesTable tbody').empty();
-                        getTable();
-                        closeEdit();
-                    }
-                    if (response.status == 400) {
-                        $('#errorMessageEdit').html(response.responseJSON.message);
-                        $('#errorMessageEdit').show();
-                    }
-                    if (response.status == 409) {
-                        $('#errorMessageEdit').html(response.responseJSON.message);
-                        $('#errorMessageEdit').show();
-                    }
-                    if (response.status == 403) {
-                        $('#errorMessageEdit').html("Acces denied");
-                        $('#errorMessageEdit').show();
-                    }
+        })
+    }
 
-                }
-            })
+    function getPositionById(positionId) {
+        let table = $('#tableselect').val();
+        let urlplus;
+        switch (table) {
+            case '1': // if (x === 'value1')
+                urlplus = "firms";
+                break;
+            case '2': // if (x === 'value2')
+                urlplus = "types";
+                break;
         }
-
-        function getPositionById(positionId) {
-            let table = $('#tableselect').val();
-            let urlplus;
-            switch (table) {
-                case '1': // if (x === 'value1')
-                    urlplus = "firms";
-                    break;
-                case '2': // if (x === 'value2')
-                    urlplus = "types";
-                    break;
+        console.log(positionId);
+        $.ajax({
+            url: serverURL + urlplus + '/' + positionId,
+            method: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                document.getElementById('idEdit').value = response.id;
+                document.getElementById('nameEdit').value = response.name;
             }
-            console.log(positionId);
-            $.ajax({
-                url: serverURL + urlplus + '/' + positionId,
-                method: 'GET',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function(response) {
-                    console.log(response);
-                    document.getElementById('idEdit').value = response.id;
-                    document.getElementById('nameEdit').value = response.name;
-                }
-            });
-        }
+        });
+    }
 
-        function getUserTable() {
+    function getUserTable() {
 
-            $.ajax({
-                url: serverURL + 'auth',
-                method: 'GET',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function(response) {
-                    console.log(response);
-                    $('#usersTable tbody').empty();
-                    $.each(response, function(key, value) {
-                        $('#usersTable tbody').append(
-                            `
+        $.ajax({
+            url: serverURL + 'auth',
+            method: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                $('#usersTable tbody').empty();
+                $.each(response, function (key, value) {
+                    $('#usersTable tbody').append(
+                        `
                             <tr id="rowID-${value.id}">
                             <td>${value.id} </td>
                             <td>${value.username} </td>
@@ -423,27 +453,27 @@
                                     <button id="user-${value.id}" class="btn-edit">Редагувати</button>    
                             </td>
                             <td>
-                                    <button id="user-${value.id}" class="btn-delete">Видалити</button>    
+                                    <button id="user-${value.id}" class="btn-delete-user">Видалити</button>    
                             </td>
                             
                             </tr>
                             `);
-                    })
-                }
-            });
-        }
-
-    </script>
-
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            var $preloader = $('#p_prldr'),
-                $svg_anm = $preloader.find('.svg_anm');
-            $svg_anm.fadeOut();
-            $preloader.delay(500).fadeOut('slow');
+                })
+            }
         });
+    }
 
-    </script>
+</script>
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        var $preloader = $('#p_prldr'),
+            $svg_anm = $preloader.find('.svg_anm');
+        $svg_anm.fadeOut();
+        $preloader.delay(500).fadeOut('slow');
+    });
+
+</script>
 </body>
 
 </html>

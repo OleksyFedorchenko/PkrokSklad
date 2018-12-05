@@ -1,13 +1,12 @@
 package com.pkrok;
 
-import com.pkrok.Domain.FirmDTO;
-import com.pkrok.Entity.FirmEntity;
-import com.pkrok.Entity.RoleEntity;
-import com.pkrok.Entity.TypeEntity;
-import com.pkrok.Entity.UserEntity;
-import com.pkrok.Exceptions.ResourceNotFoundException;
-import com.pkrok.Repository.*;
-import com.pkrok.Utils.ObjectMapperUtils;
+import com.pkrok.entity.FirmEntity;
+import com.pkrok.entity.RoleEntity;
+import com.pkrok.entity.TypeEntity;
+import com.pkrok.entity.UserEntity;
+import com.pkrok.exceptions.ResourceNotFoundException;
+import com.pkrok.repository.*;
+import com.pkrok.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

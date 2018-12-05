@@ -172,7 +172,7 @@
             if (token) {
 
                 getFirmsTypes();
-                setTimeout(getParts, 1000);
+                setTimeout(getParts, 1200);
 
 
                 $('#admin').on('click', function(e) {
@@ -243,7 +243,6 @@
                 $(document).on('mouseenter', '#partsTable tbody tr', function(e) {
                     let partImage = $(this).children('td:last-child').text();
                     $('#partImg').attr("src",serverURL + "parts/image?fileName="+partImage);
-
                 });
 
                 $(document).on('mouseleave', '#partsTable tbody tr', function(e) {
@@ -255,10 +254,8 @@
 
                 $(document).on('click', '#okEdit', function(e) {
                     let partId = $('#idEdit').val();
-                    editPart();
-                    if ($('#imageEdit')[0].files[0]) {
-                        setTimeout(uploadFile(partId), 2000);
-                    }
+                    editPart(partId);
+
                     setTimeout(getParts, 500);
                     setTimeout(closeEdit, 500);
                 });
@@ -531,7 +528,7 @@
         
 
 
-        function editPart() {
+        function editPart(partId) {
 
             let part = {
                 id: $('#idEdit').val(),
@@ -558,6 +555,9 @@
                 complete: function(response) {
                     if (response.status == 200) {
                         $('#errorMessageEdit').hide();
+                        if ($('#imageEdit')[0].files[0]) {
+                        uploadFile(partId);
+                    }
                     }
                     if (response.status == 400) {
                         $('#errorMessageEdit').html(response.responseJSON.message);
