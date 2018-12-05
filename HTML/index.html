@@ -118,26 +118,26 @@
         <form id='pop2'>
             <label id="errorMessageEdit" style="color: red"></label>
 
-            <input name="text" id="idEdit" hidden>
+            <input name="id" id="idEdit" hidden>
             <label style="font-weight: bold">Назва</label>
-            <input name="text" style="text-align: center" type="text" autofocus id="nameEdit">
+            <input name="name" style="text-align: center" type="text" autofocus id="nameEdit">
             <label style="font-weight: bold">Кількість</label>
-            <input name="text" type="number" id="quantityEdit">
+            <input name="quantity" type="number" id="quantityEdit">
             <label style="font-weight: bold">Місце</label>
-            <input name="text" type="text" id="placeEdit">
+            <input name="place" type="text" id="placeEdit">
             <label style="font-weight: bold">Ціна</label>
-            <input name="text" type="number" value="0" min="0" max="100" step="0.001" id="priceEdit">
+            <input name="price" type="number" value="0" min="0" max="100" step="0.001" id="priceEdit">
             <label style="font-weight: bold">Опис</label>
-            <input name="text" type="text" id="descriptionEdit">
+            <input name="description" type="text" id="descriptionEdit">
             <label style="font-weight: bold">Постачальник</label>
-            <select class="sa1" name="sa1" id="firmEdit">
+            <select class="sa1" name="firm.id" id="firmEdit">
             </select>
             <label style="font-weight: bold">Тип запчастини</label>
-            <select class="sa2" name="sa2" id="typeEdit">
+            <select class="sa2" name="type.id" id="typeEdit">
             </select>
-            <input name="text" id="imgEdit" hidden>
+            <input name="image" id="imgEdit" hidden>
             <label style="font-weight: bold">Малюнок</label>
-            <input type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
+            <input name="file" type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
             <br>
             <br>
             <input class="button" type="button" value="OK" id="okEdit">
@@ -211,9 +211,15 @@
                     addPart();
                 });
                 $('#cancelAdd').on('click', function(e) {
+                    isSelectedPart=false;
+                    $('#partImg').attr("src", "empty.png");
                     closeAdd();
                 });
                 $('#cancelEdit').on('click', function(e) {
+                    isSelectedPart=false;
+                    $('tr').removeClass('selected');
+                    $('#submitAddMinus').attr('disabled', 'disabled');
+                    $('#partImg').attr("src", "empty.png");
                     closeEdit();
                 });
 
@@ -253,9 +259,9 @@
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
+                    isSelectedPart=false;
                     let partId = $('#idEdit').val();
                     editPart(partId);
-
                     setTimeout(getParts, 500);
                     setTimeout(closeEdit, 500);
                 });
@@ -401,7 +407,6 @@
 
 
         function getParts() {
-            $('#submitAddMinus').attr('disabled', 'disabled');
             let search = $('#search').val();
             let sort = $('#sortTable').val();
             let firm = $('#firm option:selected').text();
@@ -413,6 +418,8 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
+                    $('#submitAddMinus').attr('disabled', 'disabled');
+                    $('#partImg').attr("src", "empty.png");
                     console.log(response);
                     $('#partsTable tbody').empty();
                     $.each(response, function(key, value) {
@@ -525,39 +532,19 @@
                 }
             });
         }
-        
 
 
-        function editPart(partId) {
-
-            let part = {
-                id: $('#idEdit').val(),
-                name: $('#nameEdit').val(),
-                quantity: $('#quantityEdit').val(),
-                place: $('#placeEdit').val(),
-                price: $('#priceEdit').val(),
-                description: $('#descriptionEdit').val(),
-                image:$('#imgEdit').val(),
-                firm: {
-                    id: $('#firmEdit').val(),
-                },
-                type: {
-                    id: $('#typeEdit').val(),
-                }
-            };
-            console.log(part);
+        function editPart() {
             $.ajax({
                 url: serverURL + 'parts/edit',
-                method: 'POST',
+                type: 'POST',
                 dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(part),
+                contentType: false,
+                processData: false,
+                data: new FormData($('#pop2')[0]),
                 complete: function(response) {
                     if (response.status == 200) {
                         $('#errorMessageEdit').hide();
-                        if ($('#imageEdit')[0].files[0]) {
-                        uploadFile(partId);
-                    }
                     }
                     if (response.status == 400) {
                         $('#errorMessageEdit').html(response.responseJSON.message);
@@ -567,36 +554,6 @@
                         $('#errorMessageEdit').html(response.responseJSON.message);
                         $('#errorMessageEdit').show();
                     }
-                }
-            })
-        }
-
-
-        function uploadFile(partId) {
-            let formData = new FormData();
-            formData.append('file', $('#imageEdit')[0].files[0]);
-
-            function setProgress(e) {
-                if (e.lengthComputable) {
-                    var complete = e.loaded / e.total;
-                    $("#pBar").text(Math.floor(complete * 100) + "%");
-                }
-            }
-            $.ajax({
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", setProgress, false);
-                    xhr.addEventListener("progress", setProgress, false);
-                    return xhr;
-                },
-                url: serverURL + 'parts/' + partId + '/image',
-                method: 'POST',
-                contentType: false,
-                processData: false,
-                data: formData,
-                async: true,
-                complete: function(res) {
-                    console.log(res);
                 }
             })
         }

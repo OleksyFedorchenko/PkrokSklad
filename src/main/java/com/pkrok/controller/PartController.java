@@ -4,6 +4,7 @@ import com.pkrok.domain.ErrorDTO;
 import com.pkrok.domain.PartsDTO;
 import com.pkrok.service.FileStorageService;
 import com.pkrok.service.PartService;
+import com.pkrok.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.io.Resource;
@@ -13,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -44,21 +44,6 @@ public class PartController {
         }
         partService.addPart(part);
         return new ResponseEntity<Void>(HttpStatus.CREATED); //201
-    }
-
-    @PostMapping("edit")
-    public ResponseEntity<?> editPart(@Valid @RequestBody PartsDTO part, BindingResult br) {
-        if (br.hasErrors()) {
-            System.out.println("Validation error");
-            String errMsg = br.getFieldErrors().stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .findFirst().get().toString();
-            ErrorDTO errorDTO = new ErrorDTO(errMsg);
-            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
-        }
-        System.out.println(part);
-        partService.setPartById(part);
-        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @PostMapping("quantity/{id}/{plus}/{minus}")
@@ -117,15 +102,23 @@ public class PartController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping("{productId}/image")
-    public ResponseEntity<?> uploadImage(
-            @PathVariable("productId") Long id,
-            @RequestParam("file") MultipartFile file
-    ) {
-        System.out.println(file.getOriginalFilename());
-        fileStorageService.storeFile(file);
-        partService.addImageToProduct(file.getOriginalFilename(), id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @PostMapping("edit")
+    public ResponseEntity<?> editPart(@Valid @ModelAttribute PartsDTO part, BindingResult br) {
+        if (br.hasErrors()) {
+            System.out.println("Validation error");
+            String errMsg = br.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .findFirst().get();
+            ErrorDTO errorDTO = new ErrorDTO(errMsg);
+            return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+        }
+        System.out.println(part);
+        partService.setPartById(part);
+        if (FileUtil.isNotEmpty(part.getFile())) {
+            fileStorageService.storeFile(part.getFile());
+            partService.addImageToProduct(part.getFile().getOriginalFilename(), part.getId());
+        }
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @GetMapping("image")
