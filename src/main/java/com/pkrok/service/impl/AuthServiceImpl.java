@@ -31,12 +31,12 @@ public class AuthServiceImpl implements AuthService {
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider){
-        this.userRepository=userRepository;
-        this.roleRepository=roleRepository;
-        this.passwordEncoder=passwordEncoder;
-        this.authenticationManager=authenticationManager;
-        this.jwtTokenProvider=jwtTokenProvider;
+    public AuthServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -79,8 +79,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void setUserById(Long id, String name,String role) {
-        UserEntity newUser=userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
+    public void setUserById(Long id, String name, String role) {
+        UserEntity newUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
         newUser.setUsername(name);
         RoleEntity roles = roleRepository.findByName(role).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
         newUser.getRoles().add(roles);

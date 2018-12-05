@@ -15,12 +15,12 @@ import java.util.Set;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
-private UserRepository userRepository;
+    private UserRepository userRepository;
 
-@Autowired
-public UserDetailsServiceImpl(UserRepository userRepository){
-    this.userRepository=userRepository;
-}
+    @Autowired
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,7 +39,7 @@ public UserDetailsServiceImpl(UserRepository userRepository){
     private Set<SimpleGrantedAuthority> getAuthority(UserEntity entity) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         entity.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName())); 	// ROLE_USER ROLE_ADMIN
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));    // ROLE_USER ROLE_ADMIN
         });
         return authorities;
     }

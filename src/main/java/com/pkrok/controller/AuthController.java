@@ -18,8 +18,8 @@ public class AuthController {
     private AuthService authService;
 
     @Autowired
-    public AuthController(AuthService authService){
-        this.authService=authService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("signup")
