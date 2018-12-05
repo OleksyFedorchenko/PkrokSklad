@@ -211,9 +211,11 @@
                     addPart();
                 });
                 $('#cancelAdd').on('click', function(e) {
+                    $('#partImg').attr("src", "empty.png");
                     closeAdd();
                 });
                 $('#cancelEdit').on('click', function(e) {
+                    $('#partImg').attr("src", "empty.png");
                     closeEdit();
                 });
 
