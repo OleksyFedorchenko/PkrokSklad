@@ -259,6 +259,7 @@
                 });
 
                 $(document).on('click', '#okEdit', function(e) {
+                    isSelectedPart=false;
                     let partId = $('#idEdit').val();
                     editPart(partId);
                     setTimeout(getParts, 500);
@@ -406,8 +407,6 @@
 
 
         function getParts() {
-            $('#submitAddMinus').attr('disabled', 'disabled');
-            $('#partImg').attr("src", "empty.png");
             let search = $('#search').val();
             let sort = $('#sortTable').val();
             let firm = $('#firm option:selected').text();
@@ -419,6 +418,8 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
+                    $('#submitAddMinus').attr('disabled', 'disabled');
+                    $('#partImg').attr("src", "empty.png");
                     console.log(response);
                     $('#partsTable tbody').empty();
                     $.each(response, function(key, value) {
