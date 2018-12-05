@@ -211,10 +211,14 @@
                     addPart();
                 });
                 $('#cancelAdd').on('click', function(e) {
+                    isSelectedPart=false;
                     $('#partImg').attr("src", "empty.png");
                     closeAdd();
                 });
                 $('#cancelEdit').on('click', function(e) {
+                    isSelectedPart=false;
+                    $('tr').removeClass('selected');
+                    $('#submitAddMinus').attr('disabled', 'disabled');
                     $('#partImg').attr("src", "empty.png");
                     closeEdit();
                 });
