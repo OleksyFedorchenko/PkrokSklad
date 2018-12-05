@@ -558,35 +558,6 @@
             })
         }
 
-        function uploadFile(partId) {
-            let formData = new FormData();
-            formData.append('file', $('#imageEdit')[0].files[0]);
-
-            function setProgress(e) {
-                if (e.lengthComputable) {
-                    var complete = e.loaded / e.total;
-                    $("#pBar").text(Math.floor(complete * 100) + "%");
-                }
-            }
-            $.ajax({
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", setProgress, false);
-                    xhr.addEventListener("progress", setProgress, false);
-                    return xhr;
-                },
-                url: serverURL + 'parts/' + partId + '/image',
-                method: 'POST',
-                contentType: false,
-                processData: false,
-                data: formData,
-                async: true,
-                complete: function(res) {
-                    console.log(res);
-                }
-            })
-        }
-
         function setQuantityById(id, plus, minus) {
             $.ajax({
                 url: serverURL + 'parts/quantity/' + id + '/' + plus + '/' + minus + '/',
