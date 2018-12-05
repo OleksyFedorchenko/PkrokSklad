@@ -79,10 +79,11 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void setUserById(UserEntity userEntity) {
-        UserEntity newUser=userRepository.findById(userEntity.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
-        newUser.setUsername(userEntity.getUsername());
-        newUser.setRoles(userEntity.getRoles());
+    public void setUserById(Long id, String name,String role) {
+        UserEntity newUser=userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
+        newUser.setUsername(name);
+        RoleEntity roles = roleRepository.findByName(role).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+        newUser.getRoles().add(roles);
         userRepository.save(newUser);
     }
 
