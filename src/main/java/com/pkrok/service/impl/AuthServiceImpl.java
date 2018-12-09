@@ -83,8 +83,15 @@ public class AuthServiceImpl implements AuthService {
         UserEntity user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
         user.setUsername(name);
         RoleEntity roles = roleRepository.findByName(role).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
-        user.getRoles().add(roles);
-        userRepository.save(user);
+        if(user.getRoles().add(roles)){
+        userRepository.save(user);}
+        else throw new AlreadyExistsException("This user already have this role");
+    }
+
+    @Override
+    public UserEntity findUserById(Long id) {
+        UserEntity user=userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id"));
+        return user;
     }
 
     @Override

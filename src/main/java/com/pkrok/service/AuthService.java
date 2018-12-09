@@ -16,4 +16,6 @@ public interface AuthService {
     void deleteUserById(Long id);
 
     void setUserById(Long id, String name, String role);
+
+    UserEntity findUserById(Long id);
 }

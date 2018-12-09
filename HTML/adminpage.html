@@ -109,6 +109,23 @@
     </form>
 </div>
 
+<div style="text-align: center" id="popupWin3" class="modalwin5">
+    <label style="font-size: 18pt"> Редагувати користувача: </label>
+    <br>
+    <form id='pop3'>
+        <label id="errorMessageEditUser" style="color: red"></label>
+        <input name="text" id="idEditUser" hidden>
+        <label style="font-weight: bold">Ім'я користувача</label>
+        <input name="text" style="text-align: center" type="text" autofocus id="nameEditUser">
+        <label style="font-weight: bold">Роль користувача</label>
+        <input name="text" style="text-align: center" type="text" autofocus id="roleEditUser">
+        <br>
+        <br>
+        <input class="button" type="button" value="OK" id="okEditUser">
+        <input class="cancelbutton" id="cancelEditUser" type="button" value="Cancel">
+    </form>
+</div>
+
 
 <hr/>
 <div align="center">
@@ -122,10 +139,13 @@
 <script>
     var boxAdd = $('#popupWin');
     var boxEdit = $('#popupWin2');
+    var boxUser = $('#popupWin3');
     boxAdd.addClass('visuallyhidden');
     boxAdd.addClass('hidden');
     boxEdit.addClass('visuallyhidden');
     boxEdit.addClass('hidden');
+    boxUser.addClass('visuallyhidden');
+    boxUser.addClass('hidden');
     $(document).ready(function () {
 
         if (token) {
@@ -154,9 +174,17 @@
             $(document).on('click', '#okEdit', function (e) {
                 editPosition();
             });
+            
+            $(document).on('click', '#okEditUser', function (e) {
+                editUser();
+            });
 
             $(document).on('click', '#cancelEdit', function (e) {
                 closeEdit();
+            });
+            
+            $(document).on('click', '#cancelEditUser', function (e) {
+                closeEditUser();
             });
 
             $(document).on('click', '#firmstypesTable tbody button.btn-delete', function (e) {
@@ -193,7 +221,17 @@
                 console.log(positionId);
                 showEdit(positionId);
             });
-        } else {
+            
+            $(document).on('click', '#usersTable tbody button.btn-edit-user', function (e) {
+                console.log(e.target.id);
+                let elementId = e.target.id;
+                let userId = elementId.split('-')[1];
+                console.log(userId);
+                showEditUser(userId);
+            });
+        } 
+        
+        else {
             $('#logoutBtn').hide();
             window.location.href = 'login.html';
         }
@@ -218,6 +256,26 @@
         });
         document.getElementById('pop').reset();
     }
+    
+    function showEditUser(userId) {
+        if (boxUser.hasClass('hidden')) {
+            boxUser.removeClass('hidden');
+            setTimeout(function () {
+                boxUser.removeClass('visuallyhidden');
+            }, 20);
+        }
+        $('#errorMessageEditUser').hide();
+        getUserById(userId);
+    }
+    
+    function closeEditUser() {
+        boxUser.addClass('visuallyhidden');
+        boxUser.one('transitionend', function (e) {
+            boxUser.addClass('hidden');
+        });
+        document.getElementById('pop3').reset();
+    }
+
 
     function showEdit(positionId) {
         if (boxEdit.hasClass('hidden')) {
@@ -406,6 +464,52 @@
             }
         })
     }
+    
+    function editUser() {
+           let id= $('#idEditUser').val();
+           let name= $('#nameEditUser').val();
+           let role= $('#roleEditUser').val();
+        $.ajax({
+            url: serverURL +'auth/'+id+'/'+name+'/'+role,
+            method: 'POST',
+            complete: function (response) {
+                if (response.status == 200) {
+                    $('#errorMessageEditUser').hide();
+                    $('#usersTable tbody').empty();
+                    getUserTable();
+                    closeEditUser();
+                }
+                if (response.status == 400) {
+                    $('#errorMessageEditUser').html(response.responseJSON.message);
+                    $('#errorMessageEditUser').show();
+                }
+                if (response.status == 409) {
+                    $('#errorMessageEditUser').html(response.responseJSON.message);
+                    $('#errorMessageEditUser').show();
+                }
+                if (response.status == 403) {
+                    $('#errorMessageEditUser').html("Acces denied");
+                    $('#errorMessageEditUser').show();
+                }
+
+            }
+        })
+    }
+    
+    function getUserById(userId){
+        $.ajax({
+            url: serverURL + 'auth/' + userId,
+            method: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                document.getElementById('idEditUser').value = response.id;
+                document.getElementById('nameEditUser').value = response.username;
+                document.getElementById('roleEditUser').value = response.roles[0].name;
+            }
+        });
+    }
 
     function getPositionById(positionId) {
         let table = $('#tableselect').val();
@@ -450,7 +554,7 @@
                             <td>${value.username} </td>
                             <td>${value.roles[0].name} </td>
                             <td>
-                                    <button id="user-${value.id}" class="btn-edit">Редагувати</button>    
+                                    <button id="user-${value.id}" class="btn-edit-user">Редагувати</button>    
                             </td>
                             <td>
                                     <button id="user-${value.id}" class="btn-delete-user">Видалити</button>    

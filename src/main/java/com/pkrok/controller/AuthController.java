@@ -44,4 +44,15 @@ public class AuthController {
         authService.deleteUserById(id);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
+    @PostMapping("{id}/{name}/{role}")
+    public ResponseEntity<?> setUserById(@PathVariable ("id") Long id, @PathVariable("name") String name, @PathVariable ("role") String role ){
+        authService.setUserById(id,name,role);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @GetMapping("{userId}")
+    public ResponseEntity<UserEntity> getUserById(@PathVariable("userId") Long id) {
+        return ResponseEntity.ok(authService.findUserById(id));
+    }
 }

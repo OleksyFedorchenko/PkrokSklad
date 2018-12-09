@@ -59,7 +59,7 @@ select {
 }
 
 .button,
-.btn-edit {
+.btn-edit,.btn-edit-user {
     background-color: darkgreen;
     cursor: url(cursor/LinkSelect.cur), pointer;
 }
@@ -195,7 +195,12 @@ label {
     width: 300px;
 }
 
-.modalwin1, .modalwin2, .modalwin3, .modalwin4 {
+.modalwin5 {
+    height: 250px;
+    width: 300px;
+}
+
+.modalwin1, .modalwin2, .modalwin3, .modalwin4, .modalwin5 {
     cursor: url(cursor/NormalSelect.cur), default;
     border: 3px outset gray;
     background: burlywood;
