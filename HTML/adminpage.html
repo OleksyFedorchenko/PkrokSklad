@@ -546,8 +546,26 @@
             success: function (response) {
                 console.log(response);
                 $('#usersTable tbody').empty();
-                $.each(response, function (key, value) {
+//               console.log(response[0].roles[0].name);
+                $.each(response, function (key, value) {  
+                    if(value.roles.length>1){
                     $('#usersTable tbody').append(
+                        `
+                            <tr id="rowID-${value.id}">
+                            <td>${value.id} </td>
+                            <td>${value.username} </td>
+                            <td>${value.roles[0].name}, ${value.roles[1].name} </td>
+                            <td>
+                                    <button id="user-${value.id}" class="btn-edit-user">Редагувати</button>    
+                            </td>
+                            <td>
+                                    <button id="user-${value.id}" class="btn-delete-user">Видалити</button>    
+                            </td>
+                            
+                            </tr>
+                            `);}
+                    else{
+                         $('#usersTable tbody').append(
                         `
                             <tr id="rowID-${value.id}">
                             <td>${value.id} </td>
@@ -562,6 +580,7 @@
                             
                             </tr>
                             `);
+                    }
                 })
             }
         });
