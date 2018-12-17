@@ -79,14 +79,8 @@ public class PartServiceImpl implements PartService {
                 throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
             }
         }
-
-        System.out.println(partDTO);
-        System.out.println(part);
-
         part = modelMapper.map(partDTO, PartEntity.class);
-        System.out.println(part);
         PartEntity tempPart = partRepository.save(part);
-        System.out.println("bla" + tempPart);
     }
 
     @Override

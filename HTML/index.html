@@ -136,6 +136,7 @@
             <select class="sa2" name="type.id" id="typeEdit">
             </select>
             <input name="image" id="imgEdit" hidden>
+            <input name="lastChanges" id="lastChanges" hidden>
             <label style="font-weight: bold">Малюнок</label>
             <input name="file" type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
             <br>
@@ -162,6 +163,9 @@
         var selectedImg;
         var boxAdd = $('#popupWin');
         var boxEdit = $('#popupWin2');
+        var date = new Date();
+        var dateNow = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+        var user = window.localStorage.getItem('user');
         boxAdd.addClass('visuallyhidden');
         boxAdd.addClass('hidden');
         boxEdit.addClass('visuallyhidden');
@@ -459,6 +463,7 @@
             let image = "null";
             let firm = $('#firm').val();
             let type = $('#type').val();
+            let lastChanges = dateNow;
             let part = {
                 name: name,
                 quantity: quantity,
@@ -471,7 +476,8 @@
                 },
                 type: {
                     id: type
-                }
+                },
+                lastChanges:lastChanges
             };
             $.ajax({
                 url: serverURL + 'parts',
@@ -529,6 +535,7 @@
                     document.getElementById('imgEdit').value = response.image;
                     document.getElementById('firmEdit').value = response.firm.id;
                     document.getElementById('typeEdit').value = response.type.id;
+                    document.getElementById('lastChanges').value=dateNow;
                 }
             });
         }

@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -48,5 +49,8 @@ public class PartEntity {
     @ManyToOne
     @JoinColumn(name = "firm_id")
     private FirmEntity firm;
+
+    @Column
+    private LocalDate lastChanges;
 
 }

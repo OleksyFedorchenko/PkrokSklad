@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 
 @Getter
@@ -46,4 +47,6 @@ public class PartsDTO {
     private FirmEntity firm;
 
     private MultipartFile file;
+
+    private LocalDate lastChanges;
 }
