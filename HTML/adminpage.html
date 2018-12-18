@@ -211,6 +211,7 @@
             $('#logoutBtn').on('click', function (e) {
                 window.localStorage.removeItem('auth_token');
                 window.localStorage.removeItem('role');
+                window.localStorage.removeItem('user');
                 window.location.reload();
             });
 
