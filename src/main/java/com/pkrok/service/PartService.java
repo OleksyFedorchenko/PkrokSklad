@@ -29,5 +29,5 @@ public interface PartService {
 
     void addImageToProduct(String image, Long id);
 
-    void setQuantityById(Long id, int plus, int minus);
+    void setQuantityById(Long id, int plus, int minus, String userChange);
 }

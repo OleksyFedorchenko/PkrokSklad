@@ -46,9 +46,9 @@ public class PartController {
         return new ResponseEntity<Void>(HttpStatus.CREATED); //201
     }
 
-    @PostMapping("quantity/{id}/{plus}/{minus}")
-    public ResponseEntity<Void> editQuantityById(@PathVariable("id") Long id, @PathVariable("plus") int plus, @PathVariable("minus") int minus) {
-        partService.setQuantityById(id, plus, minus);
+    @PostMapping("quantity/{id}/{plus}/{minus}/{userChange}")
+    public ResponseEntity<Void> editQuantityById(@PathVariable("id") Long id, @PathVariable("plus") int plus, @PathVariable("minus") int minus, @PathVariable("userChange") String userChange) {
+        partService.setQuantityById(id, plus, minus, userChange);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
