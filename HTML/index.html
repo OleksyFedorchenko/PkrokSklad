@@ -32,10 +32,11 @@
                 <tr>
                     <th hidden>id</th>
                     <th>Назва</th>
-                    <th>Кількість</th>
+                    <th>К-сть</th>
                     <th>Місце</th>
                     <th>Ціна</th>
                     <th>Опис</th>
+                    <th>Зміни</th>
                     <th hidden>Тип</th>
                     <th hidden>Постачальник</th>
                     <th></th>
@@ -137,6 +138,7 @@
             </select>
             <input name="image" id="imgEdit" hidden>
             <input name="lastChanges" id="lastChanges" hidden>
+            <input name="userChange" id="userChange" hidden>
             <label style="font-weight: bold">Малюнок</label>
             <input name="file" type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
             <br>
@@ -436,6 +438,7 @@
                             <td>${value.place} </td>
                             <td>${value.price} </td>
                             <td>${value.description} </td>
+                            <td>${value.lastChanges} - ${value.userChange}</td>
                             <td hidden>${value.type} </td>
                             <td hidden>${value.firm} </td>
                             <td>
@@ -464,6 +467,7 @@
             let firm = $('#firm').val();
             let type = $('#type').val();
             let lastChanges = dateNow;
+            let userChange = window.localStorage.getItem('user');
             let part = {
                 name: name,
                 quantity: quantity,
@@ -477,7 +481,8 @@
                 type: {
                     id: type
                 },
-                lastChanges:lastChanges
+                lastChanges:lastChanges,
+                userChange:userChange
             };
             $.ajax({
                 url: serverURL + 'parts',
@@ -536,6 +541,7 @@
                     document.getElementById('firmEdit').value = response.firm.id;
                     document.getElementById('typeEdit').value = response.type.id;
                     document.getElementById('lastChanges').value=dateNow;
+                    document.getElementById('userChange').value=window.localStorage.getItem('user');
                 }
             });
         }

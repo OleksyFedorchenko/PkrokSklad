@@ -53,4 +53,7 @@ public class PartEntity {
     @Column
     private LocalDate lastChanges;
 
+    @Column
+    private String userChange;
+
 }

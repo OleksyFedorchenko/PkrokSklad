@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
@@ -48,5 +49,8 @@ public class PartsDTO {
 
     private MultipartFile file;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate lastChanges;
+
+    private String userChange;
 }
