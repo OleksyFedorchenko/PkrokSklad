@@ -72,13 +72,13 @@
             <input type=text id="search">
 
 
-            <label style="font-weight: bold">Додати кількість</label>
+            <label style="font-weight: bold">Прихід</label>
             <input id="plus" type=number value="0" min="0">
 
             <label style="font-weight: bold">Send</label>
             <input id="submitAddMinus" disabled class="button" type="button" value="Підтвердити">
 
-            <label style="font-weight: bold">Відняти кількість</label>
+            <label style="font-weight: bold">Розхід</label>
             <input id="minus" type=number value="0" min="0">
 
             <label style="font-weight: bold">Нова запчастина</label>
@@ -108,7 +108,7 @@
             <input name="text" type="text" id="descriptionAdd">
             <br>
             <br>
-            <input class="button" id="okAdd" type="button" value="OK">
+            <input class="button" id="okAdd" type="Submit" value="OK">
             <input class="cancelbutton" id="cancelAdd" type="button" value="Cancel">
         </form>
     </div>
@@ -143,7 +143,7 @@
             <input name="file" type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
             <br>
             <br>
-            <input class="button" type="button" value="OK" id="okEdit">
+            <input class="button" type="Submit" value="OK" id="okEdit">
             <input class="cancelbutton" id="cancelEdit" type="button" value="Cancel">
             <label id='pBar'>0%</label>
         </form>
@@ -211,7 +211,8 @@
                     $('#partImg').attr("src", "empty.png");
                     showAdd();
                 });
-                $('#okAdd').on('click', function(e) {
+                $('#pop').submit(function (e) {
+                    e.preventDefault();
                     isSelectedPart=false;
                     $('#partImg').attr("src", "empty.png");
                     addPart();
@@ -264,7 +265,8 @@
                     $('#partImg').attr("src", "empty.png");}
                 });
 
-                $(document).on('click', '#okEdit', function(e) {
+                $('#pop2').submit(function (e) {
+                    e.preventDefault();
                     isSelectedPart=false;
                     let partId = $('#idEdit').val();
                     editPart(partId);
@@ -275,7 +277,6 @@
                 $(document).on('click', '#partsTable tbody button.btn-delete', function(e) {
                     var r = confirm("Ви дійсно бажаєте видалити запчастину?");
                     if (r == true) {
-                        console.log(e.target.id);
                         let elementId = e.target.id;
                         let partId = elementId.split('-')[1];
                         deletePart(partId);
@@ -283,7 +284,6 @@
                 });
 
                 $(document).on('click', '#partsTable tbody button.btn-edit', function(e) {
-                    console.log(e.target.id);
                     let elementId = e.target.id;
                     let partId = elementId.split('-')[1];
                     showEdit(partId);
@@ -349,7 +349,6 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
-                    console.log(response);
                     $('#firm').empty();
                     $.each(response, function(key, value) {
                         $('#firm').append(
@@ -365,7 +364,6 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
-                    console.log(response);
                     $('#type').empty();
                     $.each(response, function(key, value) {
                         $('#type').append(
@@ -384,7 +382,6 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
-                    console.log(response);
                     $('#' + firm).empty();
                     $.each(response, function(key, value) {
                         $('#' + firm).append(
@@ -400,7 +397,6 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
-                    console.log(response);
                     $('#' + type).empty();
                     $.each(response, function(key, value) {
                         $('#' + type).append(
@@ -427,7 +423,6 @@
                 success: function(response) {
                     $('#submitAddMinus').attr('disabled', 'disabled');
                     $('#partImg').attr("src", "empty.png");
-                    console.log(response);
                     $('#partsTable tbody').empty();
                     $.each(response, function(key, value) {
                         $('#partsTable tbody').append(
@@ -516,7 +511,6 @@
                 url: serverURL + 'parts/' + partId,
                 method: 'DELETE',
                 success: function(response) {
-                    console.log(response);
                     $('#partsTable tbody').empty();
                     getParts();
                 }
@@ -524,14 +518,12 @@
         }
 
         function getPartById(partId) {
-            console.log(partId);
             $.ajax({
                 url: serverURL + 'parts/' + partId,
                 method: 'GET',
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function(response) {
-                    console.log(response);
                     document.getElementById('idEdit').value = response.id;
                     document.getElementById('nameEdit').value = response.name;
                     document.getElementById('quantityEdit').value = response.quantity;
@@ -577,7 +569,6 @@
                 url: serverURL + 'parts/quantity/' + id + '/' + plus + '/' + minus + '/'+user+'/',
                 method: 'POST',
                 success: function(response) {
-                    console.log(response);
                     $('#partsTable tbody').empty();
                     getParts();
                 }
