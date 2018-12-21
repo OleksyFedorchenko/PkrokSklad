@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <meta property="og:title" content="Пасат-Крок.Склад"/>
     <meta property="og:image" content="social.png"/>
     <title>Warehouse-HomePage</title>
@@ -147,7 +148,6 @@
             <br>
             <input class="button" type="Submit" value="OK" id="okEdit">
             <input class="cancelbutton" id="cancelEdit" type="button" value="Cancel">
-            <label id='pBar'>0%</label>
         </form>
     </div>
 
@@ -235,12 +235,12 @@
 
 
                 $(document).on('click', '#submitAddMinus', function(e) {
+                    isSelectedPart=false;
                     let plus = $('#plus').val();
                     let minus = $('#minus').val();
                     setQuantityById(selectedId, plus, minus);
                     document.getElementById('plus').value = "0";
                     document.getElementById('minus').value = "0";
-                    isSelectedPart=false;
                     $('#partImg').attr("src", "empty.png");
                 });
 
@@ -248,9 +248,9 @@
                 $(document).on('click', '#partsTable tbody tr', function(e) {
                     $('tr').removeClass();
                     $(this).addClass('selected');
+                    isSelectedPart=true;
                     selectedId = $(this).children('td:first-child').text().split(" ")[0];
                     selectedImg=$(this).children('td:last-child').text();
-                    isSelectedPart=true;
                     $('#submitAddMinus').removeAttr('disabled');
 
                 });
@@ -341,7 +341,6 @@
                 boxEdit.addClass('hidden');
             });
             document.getElementById('pop2').reset();
-            document.getElementById('pBar').innerHTML = '0%';
         }
 
         function getFirmsTypes() {
