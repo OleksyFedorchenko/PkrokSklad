@@ -58,6 +58,36 @@ select {
     cursor: url(cursor/NormalSelect.cur), default;
 }
 
+.sp1 {
+ position:absolute;
+    font-family: Exo2;
+    font-size: 22pt;
+    top:30px;   
+    left:70px;
+}
+.sp2 {
+ position:absolute;
+    font-family: Exo2;
+    font-size: 16pt;
+    top:60px;   
+    left:70px;
+}
+.sp3 {
+ position:absolute;
+    font-family: Exo2;
+    font-size: 16pt;
+    top:85px;   
+    left:70px;
+}
+.sp4 {
+ position:absolute;
+    top:70px;   
+    right:220px;
+}
+.round {
+    border-radius: 100px; /* Радиус скругления */
+    box-shadow: 0 0 0 3px blue, 0 0 13px #333; /* Параметры теней */
+   }
 .button,
 .btn-edit,.btn-edit-user {
     background-color: darkgreen;
