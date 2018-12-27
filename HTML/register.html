@@ -32,6 +32,8 @@
     <input name="user" style="text-align: center" type="text" autofocus id="username">
     <label style="font-weight: bold">Введіть пароль</label>
     <input name="pass" style="text-align: center" type="password" autofocus id="password">
+    <label style="font-weight: bold">Аватар</label>
+    <input name="userPhoto" style="text-align: center" type="file" id="userPhoto">
     <br>
     <br>
     <input class="button" type="Submit" value="Реєструвати">
@@ -64,9 +66,12 @@
             data: JSON.stringify(user),
             complete: function (response) {
                 if (response.status == 201) {
+                    
                     document.getElementById('signupForm').reset();
                     $('#errorMessage').html("Register OK");
+                window.localStorage.removeItem('userId');
                     window.location.href = 'login.html';
+        
 
                 } else {
                     $('#errorMessage').html("User already exists");
@@ -76,6 +81,37 @@
             }
         })
     }
+    
+     
+     function uploadFile(userId) {
+            let formData = new FormData();
+            formData.append('file', $('#userPhoto')[0].files[0]);
+            $.ajax({
+                url: serverURL + 'auth/image/' + userId,
+                method: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                complete: function(res) {
+                    if (res.status == 202) {
+                        console.log(res.status);
+                    }
+                }
+            })
+        }
+    
+    
+    function getIdByName(name) {
+            $.ajax({
+                url: serverURL + 'auth/username/' + name,
+                method: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(response) {
+                    window.localStorage.setItem('userId',response);
+                }
+            });
+        }
 
 </script>
 </body>

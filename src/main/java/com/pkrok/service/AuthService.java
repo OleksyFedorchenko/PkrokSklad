@@ -18,4 +18,8 @@ public interface AuthService {
     void setUserById(Long id, String name, String role);
 
     UserEntity findUserById(Long id);
+
+    void addImageToUser(String image, Long id);
+
+    Long findUserIdByName(String name);
 }

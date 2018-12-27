@@ -98,4 +98,21 @@ public class AuthServiceImpl implements AuthService {
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public void addImageToUser(String image, Long id) {
+        System.out.println("Set image to product + " + id);
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("User with id [" + id + "] not found")
+                );
+        userEntity.setImage(image);
+        userRepository.save(userEntity);
+    }
+
+    @Override
+    public Long findUserIdByName(String name) {
+        System.out.println(name);
+        return userRepository.findByUsername(name).get().getId();
+    }
 }
