@@ -66,12 +66,12 @@ public class AuthController {
     }
 
     @GetMapping("username/{username}")
-    public ResponseEntity<Long> getUserById(@PathVariable("username") String name) {
-        System.out.println(authService.findUserIdByName(name));
-        return ResponseEntity.ok(authService.findUserIdByName(name));
+    public ResponseEntity<String> getUserById(@PathVariable("username") String username) {
+        System.out.println(authService.findImageByUsername(username));
+        return ResponseEntity.ok(authService.findImageByUsername(username));
     }
 
-    @PostMapping("image/{userId}")
+    @PostMapping("{userId}/image")
     public ResponseEntity<?> uploadImage(
             @PathVariable("userId") Long id,
             @RequestParam("file") MultipartFile file

@@ -111,8 +111,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Long findUserIdByName(String name) {
-        System.out.println(name);
-        return userRepository.findByUsername(name).get().getId();
+    public String findImageByUsername(String username) {
+        return userRepository.findByUsername(username).get().getImage();
     }
+
 }

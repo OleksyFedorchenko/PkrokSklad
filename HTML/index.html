@@ -31,7 +31,7 @@
         <span class="sp1">Pasat-Krok</span>
         <span class="sp2">warehouse</span>
         <span class="sp3">Web-application</span>
-        <span class="sp4"><img src="user.png" width="50px" height="50px" class="round"></span>
+        <span class="sp4"><img src="user.png" width="50px" height="50px" class="round" id="userImg"></span>
         
     </div>
     <!--    <a href="adminpage.html"><img src="adminlink.png" width="2%">ADMIN</a>-->
@@ -187,7 +187,8 @@
 
                 getFirmsTypes();
                 setTimeout(getParts, 1200);
-
+                getImageByUser(user);
+                
 
                 $('#admin').on('click', function(e) {
                     if (window.localStorage.getItem('role').includes('ROLE_ADMIN')) {
@@ -542,6 +543,22 @@
                     document.getElementById('typeEdit').value = response.type.id;
                     document.getElementById('lastChanges').value=dateNow;
                     document.getElementById('userChange').value=window.localStorage.getItem('user');
+                }
+            });
+        }
+        
+        function getImageByUser(user) {
+            $.ajax({
+                url: serverURL + 'auth/username/' + user,
+                method: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                complete: function(response) {
+                    console.log(response.responseText);
+                    if(response.responseText==""){
+                        $('#userImg').attr("src", "user.png");
+                    }else
+                    {$('#userImg').attr("src",serverURL + "auth/image?fileName="+response.responseText);}
                 }
             });
         }

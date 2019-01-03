@@ -74,6 +74,8 @@
             <th>Роль</th>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -189,6 +191,14 @@
             $(document).on('click', '#cancelEditUser', function (e) {
                 closeEditUser();
             });
+            
+            $(document).on('change', '#usersTable tbody input', function(e) {
+                let elementId = e.target.id;
+                console.log(elementId);
+                let userId = elementId.split('-')[1];
+                console.log(userId);
+                uploadFile(userId);
+                });
 
             $(document).on('click', '#firmstypesTable tbody button.btn-delete', function (e) {
                 var r = confirm("Ви дійсно бажаєте видалити позицію?");
@@ -541,7 +551,7 @@
     }
 
     function getUserTable() {
-
+            let imgUrl = serverURL + 'auth/image?fileName=';
         $.ajax({
             url: serverURL + 'auth',
             method: 'GET',
@@ -562,6 +572,13 @@
                             <td>${value.username} </td>
                             <td>${str.substr(0,str.length-1)} </td>
                             <td>
+                                        <img src="${value.image !== null ? (imgUrl + value.image) : ''}"
+                                        width="150px">
+                                    </td>
+                            <td>
+                                <input type="file" id="image-${value.id}">    
+                                    </td>
+                            <td>
                                     <button id="user-${value.id}" class="btn-edit-user">Редагувати</button>    
                             </td>
                             <td>
@@ -574,6 +591,25 @@
             }
         });
     }
+    
+    
+    function uploadFile(userId) {
+            let formData = new FormData();
+            formData.append('file', $('#image-' + userId)[0].files[0]);
+            $.ajax({
+                url: serverURL + 'auth/' + userId + '/image',
+                method: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                complete: function(res) {
+                    if (res.status == 202) {
+                        $('#usersTable tbody').empty();
+                        getUserTable();
+                    }
+                }
+            })
+        }
 
 </script>
 

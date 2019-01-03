@@ -21,5 +21,5 @@ public interface AuthService {
 
     void addImageToUser(String image, Long id);
 
-    Long findUserIdByName(String name);
+    String findImageByUsername(String username);
 }
