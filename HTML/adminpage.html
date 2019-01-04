@@ -29,10 +29,10 @@
     </div>
 </div>
 <div class="txtimg">
-<img src="background1.jpg" width="100%" height="169px">
-         <span class="sp1">Pasat-Krok</span>
-        <span class="sp2">warehouse</span>
-        <span class="sp3">Web-application</span>
+    <img src="background1.jpg" width="100%" height="169px">
+    <span class="sp1">Pasat-Krok</span>
+    <span class="sp2">warehouse</span>
+    <span class="sp3">Web-application</span>
 </div>
 <div class="view">
     <table class="table_blur" id="firmstypesTable">
@@ -179,7 +179,7 @@
             $(document).on('click', '#okEdit', function (e) {
                 editPosition();
             });
-            
+
             $(document).on('click', '#okEditUser', function (e) {
                 editUser();
             });
@@ -187,18 +187,18 @@
             $(document).on('click', '#cancelEdit', function (e) {
                 closeEdit();
             });
-            
+
             $(document).on('click', '#cancelEditUser', function (e) {
                 closeEditUser();
             });
-            
-            $(document).on('change', '#usersTable tbody input', function(e) {
+
+            $(document).on('change', '#usersTable tbody input', function (e) {
                 let elementId = e.target.id;
                 console.log(elementId);
                 let userId = elementId.split('-')[1];
                 console.log(userId);
                 uploadFile(userId);
-                });
+            });
 
             $(document).on('click', '#firmstypesTable tbody button.btn-delete', function (e) {
                 var r = confirm("Ви дійсно бажаєте видалити позицію?");
@@ -210,16 +210,16 @@
                     deletePosition(positionId);
                 }
             });
-            
-            $(document).on('click', '#usersTable tbody button.btn-delete-user', function(e) {
-                    var r = confirm("Ви дійсно бажаєте видалити користувача?");
-                    if (r == true) {
-                        console.log(e.target.id);
-                        let elementId = e.target.id;
-                        let userId = elementId.split('-')[1];
-                        deleteUser(userId);
-                    }
-                });
+
+            $(document).on('click', '#usersTable tbody button.btn-delete-user', function (e) {
+                var r = confirm("Ви дійсно бажаєте видалити користувача?");
+                if (r == true) {
+                    console.log(e.target.id);
+                    let elementId = e.target.id;
+                    let userId = elementId.split('-')[1];
+                    deleteUser(userId);
+                }
+            });
 
             $('#logoutBtn').on('click', function (e) {
                 window.localStorage.removeItem('auth_token');
@@ -235,7 +235,7 @@
                 console.log(positionId);
                 showEdit(positionId);
             });
-            
+
             $(document).on('click', '#usersTable tbody button.btn-edit-user', function (e) {
                 console.log(e.target.id);
                 let elementId = e.target.id;
@@ -243,8 +243,8 @@
                 console.log(userId);
                 showEditUser(userId);
             });
-        } 
-        
+        }
+
         else {
             $('#logoutBtn').hide();
             window.location.href = 'login.html';
@@ -270,7 +270,7 @@
         });
         document.getElementById('pop').reset();
     }
-    
+
     function showEditUser(userId) {
         if (boxUser.hasClass('hidden')) {
             boxUser.removeClass('hidden');
@@ -281,7 +281,7 @@
         $('#errorMessageEditUser').hide();
         getUserById(userId);
     }
-    
+
     function closeEditUser() {
         boxUser.addClass('visuallyhidden');
         boxUser.one('transitionend', function (e) {
@@ -417,8 +417,8 @@
             }
         });
     }
-    
-     function deleteUser(userId) {
+
+    function deleteUser(userId) {
         $.ajax({
             url: serverURL + 'auth/' + userId,
             method: 'DELETE',
@@ -478,13 +478,13 @@
             }
         })
     }
-    
+
     function editUser() {
-           let id= $('#idEditUser').val();
-           let name= $('#nameEditUser').val();
-           let role= $('#roleEditUser').val();
+        let id = $('#idEditUser').val();
+        let name = $('#nameEditUser').val();
+        let role = $('#roleEditUser').val();
         $.ajax({
-            url: serverURL +'auth/'+id+'/'+name+'/'+role,
+            url: serverURL + 'auth/' + id + '/' + name + '/' + role,
             method: 'POST',
             complete: function (response) {
                 if (response.status == 200) {
@@ -509,8 +509,8 @@
             }
         })
     }
-    
-    function getUserById(userId){
+
+    function getUserById(userId) {
         $.ajax({
             url: serverURL + 'auth/' + userId,
             method: 'GET',
@@ -551,7 +551,7 @@
     }
 
     function getUserTable() {
-            let imgUrl = serverURL + 'auth/image?fileName=';
+        let imgUrl = serverURL + 'auth/image?fileName=';
         $.ajax({
             url: serverURL + 'auth',
             method: 'GET',
@@ -561,16 +561,17 @@
                 console.log(response);
                 $('#usersTable tbody').empty();
 //               console.log(response[0].roles[0].name);
-                $.each(response, function (key, value) {  
-                    var str="";
-                    for(var i=0;i<=value.roles.length-1;i++){
-                    str=str.concat(value.roles[i].name+",");}
-                         $('#usersTable tbody').append(
+                $.each(response, function (key, value) {
+                    var str = "";
+                    for (var i = 0; i <= value.roles.length - 1; i++) {
+                        str = str.concat(value.roles[i].name + ",");
+                    }
+                    $('#usersTable tbody').append(
                         `
                             <tr id="rowID-${value.id}">
                             <td>${value.id} </td>
                             <td>${value.username} </td>
-                            <td>${str.substr(0,str.length-1)} </td>
+                            <td>${str.substr(0, str.length - 1)} </td>
                             <td>
                                         <img src="${value.image !== null ? (imgUrl + value.image) : ''}"
                                         width="150px">
@@ -591,25 +592,25 @@
             }
         });
     }
-    
-    
+
+
     function uploadFile(userId) {
-            let formData = new FormData();
-            formData.append('file', $('#image-' + userId)[0].files[0]);
-            $.ajax({
-                url: serverURL + 'auth/' + userId + '/image',
-                method: 'POST',
-                contentType: false,
-                processData: false,
-                data: formData,
-                complete: function(res) {
-                    if (res.status == 202) {
-                        $('#usersTable tbody').empty();
-                        getUserTable();
-                    }
+        let formData = new FormData();
+        formData.append('file', $('#image-' + userId)[0].files[0]);
+        $.ajax({
+            url: serverURL + 'auth/' + userId + '/image',
+            method: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            complete: function (res) {
+                if (res.status == 202) {
+                    $('#usersTable tbody').empty();
+                    getUserTable();
                 }
-            })
-        }
+            }
+        })
+    }
 
 </script>
 

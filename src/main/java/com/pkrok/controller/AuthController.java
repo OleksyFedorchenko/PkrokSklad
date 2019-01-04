@@ -28,7 +28,7 @@ public class AuthController {
     @Autowired
     public AuthController(AuthService authService, FileStorageServiceUserPhoto fileStorageServiceUserPhoto) {
         this.authService = authService;
-        this.fileStorageServiceUserPhoto=fileStorageServiceUserPhoto;
+        this.fileStorageServiceUserPhoto = fileStorageServiceUserPhoto;
     }
 
     @PostMapping("signup")
@@ -55,8 +55,8 @@ public class AuthController {
     }
 
     @PostMapping("{id}/{name}/{role}")
-    public ResponseEntity<?> setUserById(@PathVariable ("id") Long id, @PathVariable("name") String name, @PathVariable ("role") String role ){
-        authService.setUserById(id,name,role);
+    public ResponseEntity<?> setUserById(@PathVariable("id") Long id, @PathVariable("name") String name, @PathVariable("role") String role) {
+        authService.setUserById(id, name, role);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -78,8 +78,9 @@ public class AuthController {
     ) {
         if (FileUtil.isNotEmpty(file)) {
             System.out.println(file.getOriginalFilename());
-        fileStorageServiceUserPhoto.storeFile(file);
-        authService.addImageToUser(file.getOriginalFilename(), id);}
+            fileStorageServiceUserPhoto.storeFile(file);
+            authService.addImageToUser(file.getOriginalFilename(), id);
+        }
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
