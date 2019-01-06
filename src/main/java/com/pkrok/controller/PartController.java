@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -42,6 +43,7 @@ public class PartController {
             ErrorDTO errorDTO = new ErrorDTO(errMsg);
             return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
+        part.setLastChanges(LocalDateTime.now());
         partService.addPart(part);
         return new ResponseEntity<Void>(HttpStatus.CREATED); //201
     }
@@ -113,6 +115,7 @@ public class PartController {
             return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
         System.out.println(part);
+        part.setLastChanges(LocalDateTime.now());
         partService.setPartById(part);
         if (FileUtil.isNotEmpty(part.getFile())) {
             fileStorageService.storeFile(part.getFile());

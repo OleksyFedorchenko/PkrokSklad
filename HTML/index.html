@@ -150,7 +150,7 @@
         <select class="sa2" name="type.id" id="typeEdit">
         </select>
         <input name="image" id="imgEdit" hidden>
-        <input name="lastChanges" id="lastChanges" hidden>
+        
         <input name="userChange" id="userChange" hidden>
         <label style="font-weight: bold">Малюнок</label>
         <input name="file" type="file" class="form-control" id="imageEdit" accept="image/*,image/jpeg">
@@ -473,7 +473,6 @@
         let image = "null";
         let firm = $('#firm').val();
         let type = $('#type').val();
-        let lastChanges = new Date().toISOString();
         let userChange = window.localStorage.getItem('user');
         let part = {
             name: name,
@@ -488,7 +487,6 @@
             type: {
                 id: type
             },
-            lastChanges: lastChanges,
             userChange: userChange
         };
         $.ajax({
@@ -544,7 +542,6 @@
                 document.getElementById('imgEdit').value = response.image;
                 document.getElementById('firmEdit').value = response.firm.id;
                 document.getElementById('typeEdit').value = response.type.id;
-                document.getElementById('lastChanges').value = new Date().toISOString();
                 document.getElementById('userChange').value = window.localStorage.getItem('user');
             }
         });
