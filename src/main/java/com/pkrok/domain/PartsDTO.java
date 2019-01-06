@@ -48,7 +48,7 @@ public class PartsDTO {
 
     private MultipartFile file;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate lastChanges;
 
     private String userChange;

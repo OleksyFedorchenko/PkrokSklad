@@ -179,8 +179,7 @@
     var selectedImg;
     var boxAdd = $('#popupWin');
     var boxEdit = $('#popupWin2');
-    var date = new Date();
-    var dateNow = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    var dateNow = new Date().toISOString();
     var user = window.localStorage.getItem('user');
     boxAdd.addClass('visuallyhidden');
     boxAdd.addClass('hidden');
