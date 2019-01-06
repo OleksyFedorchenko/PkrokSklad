@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -51,7 +51,7 @@ public class PartEntity {
     private FirmEntity firm;
 
     @Column
-    private LocalDate lastChanges;
+    private LocalDateTime lastChanges;
 
     @Column
     private String userChange;

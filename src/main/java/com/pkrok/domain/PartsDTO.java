@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -38,7 +38,6 @@ public class PartsDTO {
     private String description;
 
     private String image;
-    //    private Date lastUpdate;
 
     @NotNull(message = "Field 'TYPE' can't be null")
     private TypeEntity type;
@@ -48,8 +47,8 @@ public class PartsDTO {
 
     private MultipartFile file;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate lastChanges;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime lastChanges;
 
     private String userChange;
 }

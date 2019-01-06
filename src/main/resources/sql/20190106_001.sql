@@ -1,0 +1,1 @@
+alter table parts modify last_changes datetime null;
