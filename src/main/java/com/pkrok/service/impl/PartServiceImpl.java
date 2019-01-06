@@ -10,7 +10,7 @@ import com.pkrok.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -124,7 +124,7 @@ public class PartServiceImpl implements PartService {
         PartEntity partEntity = partRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Part with this id not found"));
         int quantityBeforeEdit = partEntity.getQuantity();
         partEntity.setQuantity(quantityBeforeEdit + plus - minus);
-        partEntity.setLastChanges(LocalDate.now());
+        partEntity.setLastChanges(LocalDateTime.now());
         partEntity.setUserChange(userChange);
         partRepository.save(partEntity);
     }
