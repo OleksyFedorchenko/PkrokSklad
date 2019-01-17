@@ -115,7 +115,6 @@ public class PartController {
             return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
         }
         System.out.println(part);
-        part.setLastChanges(LocalDateTime.now());
         partService.setPartById(part);
         if (FileUtil.isNotEmpty(part.getFile())) {
             fileStorageService.storeFile(part.getFile());

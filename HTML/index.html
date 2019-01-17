@@ -36,7 +36,7 @@
     <span class="sp1">Pasat-Krok</span>
     <span class="sp2">warehouse</span>
     <span class="sp3">Web-application</span>
-    <span class="sp4"><img src="user.png" width="50px" height="50px" class="round" id="userImg"></span>
+    <span class="sp4"><img src="user.png" width="60px" height="60px" class="round" id="userImg"></span>
 
 </div>
 <!--    <a href="adminpage.html"><img src="adminlink.png" width="2%">ADMIN</a>-->
@@ -49,7 +49,7 @@
             <th>К-сть</th>
             <th>Місце</th>
             <th>Ціна</th>
-            <th>Опис</th>
+            <th hidden>Опис</th>
             <th>Зміни</th>
             <th hidden>Тип</th>
             <th hidden>Постачальник</th>
@@ -331,7 +331,7 @@
         boxAdd.one('transitionend', function (e) {
             boxAdd.addClass('hidden');
         });
-        document.getElementById('pop').reset();
+        
     }
 
     function showEdit(partId) {
@@ -351,7 +351,7 @@
         boxEdit.one('transitionend', function (e) {
             boxEdit.addClass('hidden');
         });
-        document.getElementById('pop2').reset();
+        
     }
 
     function getFirmsTypes() {
@@ -445,8 +445,8 @@
                             <td>${value.quantity} </td>
                             <td>${value.place} </td>
                             <td>${value.price} </td>
-                            <td>${value.description} </td>
-                            <td>${value.lastChanges} - ${value.userChange}</td>
+                            <td hidden>${value.description} </td>
+                            <td>${value.lastChanges[0]}-${value.lastChanges[1]}-${value.lastChanges[2]}, ${value.lastChanges[3]}:${value.lastChanges[4]}:${value.lastChanges[5]} - ${value.userChange}</td>
                             <td hidden>${value.type} </td>
                             <td hidden>${value.firm} </td>
                             <td>

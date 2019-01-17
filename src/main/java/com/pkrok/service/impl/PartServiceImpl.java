@@ -67,21 +67,21 @@ public class PartServiceImpl implements PartService {
     @Override
     public void setPartById(PartsDTO partDTO) {
         PartEntity part = partRepository.findById(partDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Could not edit this id not found"));
-//        part.setName(partDTO.getName());
-//        part.setQuantity(partDTO.getQuantity());
-//        part.setPlace(partDTO.getPlace());
-//        part.setDescription(partDTO.getDescription());
-//        part.setFirm(partDTO.getFirm());
-//        part.setType(partDTO.getType());
-//        part.setImage(partDTO.getImage());
+        part.setName(partDTO.getName());
+        part.setQuantity(partDTO.getQuantity());
+        part.setPlace(partDTO.getPlace());
+        part.setDescription(partDTO.getDescription());
+        part.setFirm(partDTO.getFirm());
+        part.setType(partDTO.getType());
+        part.setImage(partDTO.getImage());
+        part.setLastChanges(LocalDateTime.now());
         PartEntity part1 = partRepository.findByName(part.getName());
         if (part1 != null) {
             if (!part1.getName().equals(part.getName())) {
                 throw new AlreadyExistsException("Part with name [" + part.getName() + "]already exists");
             }
         }
-        part = modelMapper.map(partDTO, PartEntity.class);
-        PartEntity tempPart = partRepository.save(part);
+        partRepository.save(part);
     }
 
     @Override

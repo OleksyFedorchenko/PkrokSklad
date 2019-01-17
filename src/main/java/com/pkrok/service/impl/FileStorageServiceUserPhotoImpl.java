@@ -21,7 +21,7 @@ public class FileStorageServiceUserPhotoImpl implements FileStorageServiceUserPh
     private final Path fileStorageLocation;
 
     public FileStorageServiceUserPhotoImpl() {
-        String uploadDir = PATH + SEPARATOR + "userphoto";
+        String uploadDir = PATH+SEPARATOR+"userphoto";
         System.out.println(uploadDir);
 
         this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
