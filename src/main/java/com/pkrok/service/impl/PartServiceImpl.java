@@ -74,6 +74,7 @@ public class PartServiceImpl implements PartService {
         part.setFirm(partDTO.getFirm());
         part.setType(partDTO.getType());
         part.setImage(partDTO.getImage());
+        part.setUserChange(partDTO.getUserChange());
         part.setLastChanges(LocalDateTime.now());
         PartEntity part1 = partRepository.findByName(part.getName());
         if (part1 != null) {

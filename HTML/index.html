@@ -20,6 +20,9 @@
             font-weight: bold;
             color: RED;
         }
+        .selected2 {
+            color: red;
+        }
     </style>
 </head>
 
@@ -266,11 +269,14 @@
             });
 
             $(document).on('mouseenter', '#partsTable tbody tr', function (e) {
+                $('tr').removeClass('selected2');
+                $(this).addClass('selected2');
                 let partImage = $(this).children('td:last-child').text();
                 $('#partImg').attr("src", serverURL + "parts/image?fileName=" + partImage);
             });
 
             $(document).on('mouseleave', '#partsTable tbody tr', function (e) {
+                $('tr').removeClass('selected2');
                 if (isSelectedPart) {
                     $('#partImg').attr("src", serverURL + "parts/image?fileName=" + selectedImg);
                 } else {
@@ -282,8 +288,7 @@
                 e.preventDefault();
                 isSelectedPart = false;
                 let partId = $('#idEdit').val();
-                editPart(partId);
-                setTimeout(getParts, 500);
+                editPart();
                 setTimeout(closeEdit, 500);
             });
 
@@ -344,6 +349,7 @@
         $('#errorMessageEdit').hide();
         getFirmsTypesAddEdit('firmEdit', 'typeEdit');
         getPartById(partId);
+        document.getElementById('imageEdit').value="";
     }
 
     function closeEdit() {
@@ -576,6 +582,7 @@
             complete: function (response) {
                 if (response.status == 200) {
                     $('#errorMessageEdit').hide();
+                    getParts();
                 }
                 if (response.status == 400) {
                     $('#errorMessageEdit').html(response.responseJSON.message);
