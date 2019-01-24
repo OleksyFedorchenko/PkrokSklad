@@ -336,7 +336,7 @@
         boxAdd.one('transitionend', function (e) {
             boxAdd.addClass('hidden');
         });
-        
+
     }
 
     function showEdit(partId) {
@@ -357,7 +357,7 @@
         boxEdit.one('transitionend', function (e) {
             boxEdit.addClass('hidden');
         });
-        
+
     }
 
     function getFirmsTypes() {
@@ -451,8 +451,8 @@
                             <td>${value.quantity} </td>
                             <td>${value.place} </td>
                             <td>${value.price} </td>
-                            <td hidden>${value.description} </td>
-                            <td>${value.lastChanges[0]}-${value.lastChanges[1]}-${value.lastChanges[2]}, ${value.lastChanges[3]}:${value.lastChanges[4]}:${value.lastChanges[5]} - ${value.userChange}</td>
+                            <td>${value.description} </td>
+                            <td>${value.lastChanges} - ${value.userChange}</td>
                             <td hidden>${value.type} </td>
                             <td hidden>${value.firm} </td>
                             <td>

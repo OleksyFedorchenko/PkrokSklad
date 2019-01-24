@@ -3,12 +3,14 @@ package com.pkrok.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "firm")
