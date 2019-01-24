@@ -193,8 +193,10 @@
         if (token) {
 
             getFirmsTypes();
-            setTimeout(getParts, 1200);
+            setTimeout(getParts,1200);
             getImageByUser(user);
+            
+            
 
 
             $('#admin').on('click', function (e) {
@@ -287,9 +289,7 @@
             $('#pop2').submit(function (e) {
                 e.preventDefault();
                 isSelectedPart = false;
-                let partId = $('#idEdit').val();
                 editPart();
-                setTimeout(closeEdit, 500);
             });
 
             $(document).on('click', '#partsTable tbody button.btn-delete', function (e) {
@@ -347,7 +347,6 @@
             }, 20);
         }
         $('#errorMessageEdit').hide();
-        getFirmsTypesAddEdit('firmEdit', 'typeEdit');
         getPartById(partId);
         document.getElementById('imageEdit').value="";
     }
@@ -390,19 +389,16 @@
                             `);
                 })
             }
-        });
-    }
-
-    function getFirmsTypesAddEdit(firm, type) {
+        });  
         $.ajax({
             url: serverURL + 'firms',
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
             success: function (response) {
-                $('#' + firm).empty();
+                $('#firmEdit').empty();
                 $.each(response, function (key, value) {
-                    $('#' + firm).append(
+                    $('#firmEdit').append(
                         `
                             <option value="${value.id}">${value.name}</option>
                             `);
@@ -415,15 +411,15 @@
             dataType: 'json',
             contentType: 'application/json',
             success: function (response) {
-                $('#' + type).empty();
+                $('#typeEdit').empty();
                 $.each(response, function (key, value) {
-                    $('#' + type).append(
+                    $('#typeEdit').append(
                         `
                             <option value="${value.id}">${value.name}</option>
                             `);
                 })
             }
-        });
+        }); 
     }
 
 
@@ -451,7 +447,7 @@
                             <td>${value.quantity} </td>
                             <td>${value.place} </td>
                             <td>${value.price} </td>
-                            <td>${value.description} </td>
+                            <td hidden>${value.description} </td>
                             <td>${value.lastChanges} - ${value.userChange}</td>
                             <td hidden>${value.type} </td>
                             <td hidden>${value.firm} </td>
@@ -583,6 +579,7 @@
                 if (response.status == 200) {
                     $('#errorMessageEdit').hide();
                     getParts();
+                    closeEdit();
                 }
                 if (response.status == 400) {
                     $('#errorMessageEdit').html(response.responseJSON.message);
