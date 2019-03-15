@@ -22,7 +22,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     private final Path fileStorageLocation;
 
     public FileStorageServiceImpl() {
-        String uploadDir = PATH+SEPARATOR+"uploads";
+        String uploadDir = "/home/alex/uploads";
         System.out.println(uploadDir);
 
         this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
